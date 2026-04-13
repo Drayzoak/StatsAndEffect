@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 143730f5a00e4fecb955f5d8b60d7b16, type: 3}
+  m_Name: Calculate Damage
+  m_EditorClassIdentifier: StatAndEffects::StatAndEffects.Effects.EffectObject
+  processors:
+  - rid: 4576332942180614895
+  - rid: 4576332942180614896
+  references:
+    version: 2
+    RefIds:
+    - rid: 4576332942180614895
+      type: {class: AttackEffect, ns: StatAndEffects.Effects, asm: StatAndEffects}
+      data:
+        statDefinition: {fileID: 11400000, guid: 7cdb7c5b3210d2341972b058c6201af5, type: 2}
+    - rid: 4576332942180614896
+      type: {class: CriticalEffect, ns: StatAndEffects.Effects, asm: StatAndEffects}
+      data:
+        critChanceDefinition: {fileID: 11400000, guid: 5949ae514bb3d1b4b87e68e1aba7e0c9, type: 2}
+        critDamageDefinition: {fileID: 11400000, guid: 2de154f37205a0a4e8423cf9c33f4179, type: 2}

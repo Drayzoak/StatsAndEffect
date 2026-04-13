@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 143730f5a00e4fecb955f5d8b60d7b16, type: 3}
+  m_Name: TakeDamage
+  m_EditorClassIdentifier: StatAndEffects::StatAndEffects.Effects.EffectObject
+  processors:
+  - rid: 4576332942180615020
+  - rid: 4576332942180615021
+  references:
+    version: 2
+    RefIds:
+    - rid: 4576332942180615020
+      type: {class: DefenseEffect, ns: StatAndEffects.Effects, asm: StatAndEffects}
+      data:
+        statDefinition: {fileID: 11400000, guid: d4fd3527bace338469d70e025a0b2773, type: 2}
+    - rid: 4576332942180615021
+      type: {class: ApplyVitalStat, ns: StatAndEffects.Effects, asm: StatAndEffects}
+      data:
+        statDefinition: {fileID: 11400000, guid: a5203ca9d27335e4b845d4d6e50ea803, type: 2}

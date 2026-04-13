@@ -1,0 +1,844 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!29 &1
+OcclusionCullingSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_OcclusionBakeSettings:
+    smallestOccluder: 5
+    smallestHole: 0.25
+    backfaceThreshold: 100
+  m_SceneGUID: 00000000000000000000000000000000
+  m_OcclusionCullingData: {fileID: 0}
+--- !u!104 &2
+RenderSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 10
+  m_Fog: 0
+  m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  m_FogMode: 3
+  m_FogDensity: 0.01
+  m_LinearFogStart: 0
+  m_LinearFogEnd: 300
+  m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
+  m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
+  m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
+  m_AmbientIntensity: 1
+  m_AmbientMode: 0
+  m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
+  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_HaloStrength: 0.5
+  m_FlareStrength: 1
+  m_FlareFadeSpeed: 3
+  m_HaloTexture: {fileID: 0}
+  m_SpotCookie: {fileID: 10001, guid: 0000000000000000e000000000000000, type: 0}
+  m_DefaultReflectionMode: 0
+  m_DefaultReflectionResolution: 128
+  m_ReflectionBounces: 1
+  m_ReflectionIntensity: 1
+  m_CustomReflection: {fileID: 0}
+  m_Sun: {fileID: 0}
+  m_UseRadianceAmbientProbe: 0
+--- !u!157 &3
+LightmapSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 13
+  m_BakeOnSceneLoad: 0
+  m_GISettings:
+    serializedVersion: 2
+    m_BounceScale: 1
+    m_IndirectOutputScale: 1
+    m_AlbedoBoost: 1
+    m_EnvironmentLightingMode: 0
+    m_EnableBakedLightmaps: 1
+    m_EnableRealtimeLightmaps: 0
+  m_LightmapEditorSettings:
+    serializedVersion: 12
+    m_Resolution: 2
+    m_BakeResolution: 40
+    m_AtlasSize: 1024
+    m_AO: 0
+    m_AOMaxDistance: 1
+    m_CompAOExponent: 1
+    m_CompAOExponentDirect: 0
+    m_ExtractAmbientOcclusion: 0
+    m_Padding: 2
+    m_LightmapParameters: {fileID: 0}
+    m_LightmapsBakeMode: 1
+    m_TextureCompression: 1
+    m_ReflectionCompression: 2
+    m_MixedBakeMode: 2
+    m_BakeBackend: 2
+    m_PVRSampling: 1
+    m_PVRDirectSampleCount: 32
+    m_PVRSampleCount: 512
+    m_PVRBounces: 2
+    m_PVREnvironmentSampleCount: 256
+    m_PVREnvironmentReferencePointCount: 2048
+    m_PVRFilteringMode: 1
+    m_PVRDenoiserTypeDirect: 1
+    m_PVRDenoiserTypeIndirect: 1
+    m_PVRDenoiserTypeAO: 1
+    m_PVRFilterTypeDirect: 0
+    m_PVRFilterTypeIndirect: 0
+    m_PVRFilterTypeAO: 0
+    m_PVREnvironmentMIS: 1
+    m_PVRCulling: 1
+    m_PVRFilteringGaussRadiusDirect: 1
+    m_PVRFilteringGaussRadiusIndirect: 1
+    m_PVRFilteringGaussRadiusAO: 1
+    m_PVRFilteringAtrousPositionSigmaDirect: 0.5
+    m_PVRFilteringAtrousPositionSigmaIndirect: 2
+    m_PVRFilteringAtrousPositionSigmaAO: 1
+    m_ExportTrainingData: 0
+    m_TrainingDataDestination: TrainingData
+    m_LightProbeSampleCountMultiplier: 4
+  m_LightingDataAsset: {fileID: 20201, guid: 0000000000000000f000000000000000, type: 0}
+  m_LightingSettings: {fileID: 0}
+--- !u!196 &4
+NavMeshSettings:
+  serializedVersion: 2
+  m_ObjectHideFlags: 0
+  m_BuildSettings:
+    serializedVersion: 3
+    agentTypeID: 0
+    agentRadius: 0.5
+    agentHeight: 2
+    agentSlope: 45
+    agentClimb: 0.4
+    ledgeDropHeight: 0
+    maxJumpAcrossDistance: 0
+    minRegionArea: 2
+    manualCellSize: 0
+    cellSize: 0.16666667
+    manualTileSize: 0
+    tileSize: 256
+    buildHeightMesh: 0
+    maxJobWorkers: 0
+    preserveTilesOutsideBounds: 0
+    debug:
+      m_Flags: 0
+  m_NavMeshData: {fileID: 0}
+--- !u!1 &171392272
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 171392274}
+  - component: {fileID: 171392273}
+  m_Layer: 0
+  m_Name: Global Volume
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &171392273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 171392272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Core.Runtime::UnityEngine.Rendering.Volume
+  m_IsGlobal: 1
+  priority: 0
+  blendDistance: 0
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: a51eb1fdda67488449ca5b12e5ea29e8, type: 2}
+--- !u!4 &171392274
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 171392272}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 125.150894, y: 16.640625, z: -456.86057}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &792517185
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 792517187}
+  - component: {fileID: 792517186}
+  m_Layer: 0
+  m_Name: TickDebugger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &792517186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 792517185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b42683597df4bf0b82837f03c23f439, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: TickSystem::Common.TickSystem.TickDebugger
+  show: 1
+--- !u!4 &792517187
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 792517185}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -12.96857, y: 0, z: -384.07254}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1346974654
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1346974656}
+  - component: {fileID: 1346974655}
+  m_Layer: 0
+  m_Name: Example
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1346974655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1346974654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 105798989dfe49a9ae8a2729a569a439, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DefaultNamespace.Example
+  health:
+    rid: 3949958418890752813
+  mana:
+    rid: 3949958418890752814
+  sanity:
+    rid: 3949958418890752815
+  strength:
+    rid: 3949958418890752816
+  dexterity:
+    rid: 3949958418890752817
+  constitution:
+    rid: 3949958418890752818
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 3949958418890752813
+      type: {class: VitalStat, ns: StatAndEffects.Stat, asm: StatAndEffects}
+      data:
+        m_DigitAccuracy: 2
+        m_MaxModCapacity: 16
+        m_IsDirty: 0
+        m_StatDefinition: {fileID: 0}
+        m_Value: 8
+        m_BaseValue: 0
+        m_ModifiedValue: 8
+        m_EffectValue: 0
+        _layerCreationContext:
+          rid: -2
+        serializedStatModifiers:
+        - rid: 3949958418890752856
+        - rid: 3949958418890752857
+        - rid: 3949958418890752858
+        - rid: 3949958418890752859
+        - rid: 3949958418890752860
+        - rid: 3949958418890752861
+        - rid: 3949958418890752863
+        - rid: 3949958418890752864
+        m_MinValue: 0
+        m_CurrentValue: 0
+    - rid: 3949958418890752814
+      type: {class: VitalStat, ns: StatAndEffects.Stat, asm: StatAndEffects}
+      data:
+        m_DigitAccuracy: 2
+        m_MaxModCapacity: 16
+        m_IsDirty: 0
+        m_StatDefinition: {fileID: 0}
+        m_Value: 50
+        m_BaseValue: 50
+        m_ModifiedValue: 0
+        m_EffectValue: 0
+        _layerCreationContext:
+          rid: 3949958418890752819
+        serializedStatModifiers: []
+        m_MinValue: 0
+        m_CurrentValue: 30
+    - rid: 3949958418890752815
+      type: {class: VitalStat, ns: StatAndEffects.Stat, asm: StatAndEffects}
+      data:
+        m_DigitAccuracy: 2
+        m_MaxModCapacity: 16
+        m_IsDirty: 0
+        m_StatDefinition: {fileID: 0}
+        m_Value: 50
+        m_BaseValue: 50
+        m_ModifiedValue: 0
+        m_EffectValue: 0
+        _layerCreationContext:
+          rid: 3949958418890752820
+        serializedStatModifiers: []
+        m_MinValue: 0
+        m_CurrentValue: 40
+    - rid: 3949958418890752816
+      type: {class: PrimaryStat, ns: StatAndEffects.Stat, asm: StatAndEffects}
+      data:
+        m_DigitAccuracy: 2
+        m_MaxModCapacity: 16
+        m_IsDirty: 0
+        m_StatDefinition: {fileID: 0}
+        m_Value: 0
+        m_BaseValue: 0
+        m_ModifiedValue: 0
+        m_EffectValue: 0
+        _layerCreationContext:
+          rid: -2
+        serializedStatModifiers: []
+    - rid: 3949958418890752817
+      type: {class: PrimaryStat, ns: StatAndEffects.Stat, asm: StatAndEffects}
+      data:
+        m_DigitAccuracy: 2
+        m_MaxModCapacity: 2
+        m_IsDirty: 0
+        m_StatDefinition: {fileID: 0}
+        m_Value: 5
+        m_BaseValue: 5
+        m_ModifiedValue: 0
+        m_EffectValue: 0
+        _layerCreationContext:
+          rid: 3949958418890752821
+        serializedStatModifiers: []
+    - rid: 3949958418890752818
+      type: {class: PrimaryStat, ns: StatAndEffects.Stat, asm: StatAndEffects}
+      data:
+        m_DigitAccuracy: 2
+        m_MaxModCapacity: 2
+        m_IsDirty: 0
+        m_StatDefinition: {fileID: 0}
+        m_Value: 10
+        m_BaseValue: 10
+        m_ModifiedValue: 0
+        m_EffectValue: 0
+        _layerCreationContext:
+          rid: 3949958418890752822
+        serializedStatModifiers: []
+    - rid: 3949958418890752819
+      type: {class: LayerCreationContext, ns: StatAndEffects.Builder, asm: StatAndEffects}
+      data:
+        layers:
+          keys: 0000000001000000
+          values:
+          - operations:
+              keys: 00000000
+              values: 18000000
+          - operations:
+              keys: 000000000100000002000000
+              values: 180000001800000018000000
+    - rid: 3949958418890752820
+      type: {class: LayerCreationContext, ns: StatAndEffects.Builder, asm: StatAndEffects}
+      data:
+        layers:
+          keys: 000000000100000002000000
+          values:
+          - operations:
+              keys: 000000000100000002000000
+              values: 180000001800000018000000
+          - operations:
+              keys: 000000000100000002000000
+              values: 180000001800000018000000
+          - operations:
+              keys: 000000000100000002000000
+              values: 180000001800000018000000
+    - rid: 3949958418890752821
+      type: {class: LayerCreationContext, ns: StatAndEffects.Builder, asm: StatAndEffects}
+      data:
+        layers:
+          keys: 00000000
+          values:
+          - operations:
+              keys: 00000000
+              values: 18000000
+    - rid: 3949958418890752822
+      type: {class: LayerCreationContext, ns: StatAndEffects.Builder, asm: StatAndEffects}
+      data:
+        layers:
+          keys: 000000000100000002000000
+          values:
+          - operations:
+              keys: 000000000100000002000000
+              values: 180000001800000018000000
+          - operations:
+              keys: 000000000100000002000000
+              values: 180000001800000018000000
+          - operations:
+              keys: 000000000100000002000000
+              values: 180000001800000018000000
+    - rid: 3949958418890752856
+      type: {class: StatModifier, ns: StatAndEffects.Modifiers, asm: StatAndEffects}
+      data:
+        type: 0
+        layer: 0
+        value: 1
+    - rid: 3949958418890752857
+      type: {class: StatModifier, ns: StatAndEffects.Modifiers, asm: StatAndEffects}
+      data:
+        type: 0
+        layer: 0
+        value: 1
+    - rid: 3949958418890752858
+      type: {class: StatModifier, ns: StatAndEffects.Modifiers, asm: StatAndEffects}
+      data:
+        type: 0
+        layer: 0
+        value: 1
+    - rid: 3949958418890752859
+      type: {class: StatModifier, ns: StatAndEffects.Modifiers, asm: StatAndEffects}
+      data:
+        type: 0
+        layer: 0
+        value: 1
+    - rid: 3949958418890752860
+      type: {class: StatModifier, ns: StatAndEffects.Modifiers, asm: StatAndEffects}
+      data:
+        type: 0
+        layer: 0
+        value: 1
+    - rid: 3949958418890752861
+      type: {class: StatModifier, ns: StatAndEffects.Modifiers, asm: StatAndEffects}
+      data:
+        type: 0
+        layer: 0
+        value: 1
+    - rid: 3949958418890752863
+      type: {class: StatModifier, ns: StatAndEffects.Modifiers, asm: StatAndEffects}
+      data:
+        type: 0
+        layer: 0
+        value: 1
+    - rid: 3949958418890752864
+      type: {class: StatModifier, ns: StatAndEffects.Modifiers, asm: StatAndEffects}
+      data:
+        type: 0
+        layer: 0
+        value: 1
+--- !u!4 &1346974656
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1346974654}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -12.96857, y: 0, z: -384.07254}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1787455315
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1787455318}
+  - component: {fileID: 1787455317}
+  - component: {fileID: 1787455316}
+  m_Layer: 0
+  m_Name: Main Camera
+  m_TagString: MainCamera
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!81 &1787455316
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1787455315}
+  m_Enabled: 1
+--- !u!20 &1787455317
+Camera:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1787455315}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 1
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_projectionMatrixMode: 1
+  m_GateFitMode: 2
+  m_FOVAxisMode: 0
+  m_Iso: 200
+  m_ShutterSpeed: 0.005
+  m_Aperture: 16
+  m_FocusDistance: 10
+  m_FocalLength: 50
+  m_BladeCount: 5
+  m_Curvature: {x: 2, y: 11}
+  m_BarrelClipping: 0.25
+  m_Anamorphism: 0
+  m_SensorSize: {x: 36, y: 24}
+  m_LensShift: {x: 0, y: 0}
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.3
+  far clip plane: 1000
+  field of view: 60
+  orthographic: 0
+  orthographic size: 5
+  m_Depth: -1
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 1
+  m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
+--- !u!4 &1787455318
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1787455315}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1935338744
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1935338746}
+  - component: {fileID: 1935338745}
+  m_Layer: 0
+  m_Name: Directional Light
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!108 &1935338745
+Light:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1935338744}
+  m_Enabled: 1
+  serializedVersion: 12
+  m_Type: 1
+  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
+  m_Intensity: 1
+  m_Range: 10
+  m_SpotAngle: 30
+  m_InnerSpotAngle: 21.80208
+  m_CookieSize2D: {x: 10, y: 10}
+  m_Shadows:
+    m_Type: 2
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+    m_CullingMatrixOverride:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    m_UseCullingMatrixOverride: 0
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingLayerMask: 1
+  m_Lightmapping: 4
+  m_LightShadowCasterMode: 0
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 1
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_UseBoundingSphereOverride: 0
+  m_UseViewFrustumForShadowCasterCull: 1
+  m_ForceVisible: 0
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
+  m_LightUnit: 1
+  m_LuxAtDistance: 1
+  m_EnableSpotReflector: 1
+--- !u!4 &1935338746
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1935338744}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
+  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &2015230720
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2015230722}
+  - component: {fileID: 2015230724}
+  - component: {fileID: 2015230725}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2015230722
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2015230720}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 140.68123, y: 0, z: -382.07068}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2015230724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2015230720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c439ffd26b6a09441939c97bb0bd03a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: StatAndEffects::NewMonoBehaviourScript
+  stats: {fileID: 2015230725}
+--- !u!114 &2015230725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2015230720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9dda368de4749d18469b4efe81a198d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: StatAndEffects::StatAndEffects.EntityStats
+  Container:
+    rid: 4576332926529306819
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 4576332926529306819
+      type: {class: EntityStatsContainer, ns: StatAndEffects, asm: StatAndEffects}
+      data:
+        StatsList:
+        - rid: 4576332942180614414
+        - rid: 4576332926529306820
+        - rid: 4576332926529306829
+        - rid: 4576332926529306831
+        - rid: 4576332942180614412
+        effects:
+        - rid: 4576332942180614757
+        - rid: 4576332942180614847
+        - rid: 4576332942180615022
+    - rid: 4576332926529306820
+      type: {class: PrimaryStat, ns: StatAndEffects.Stat, asm: StatAndEffects}
+      data:
+        m_DigitAccuracy: 2
+        m_MaxModCapacity: 16
+        m_IsDirty: 0
+        m_StatDefinition: {fileID: 11400000, guid: 7cdb7c5b3210d2341972b058c6201af5, type: 2}
+        m_Value: 2
+        m_BaseValue: 2
+        m_ModifiedValue: 0
+        m_EffectValue: 0
+        _layerCreationContext:
+          rid: -2
+        serializedStatModifiers: []
+    - rid: 4576332926529306829
+      type: {class: PrimaryStat, ns: StatAndEffects.Stat, asm: StatAndEffects}
+      data:
+        m_DigitAccuracy: 2
+        m_MaxModCapacity: 16
+        m_IsDirty: 0
+        m_StatDefinition: {fileID: 11400000, guid: 5949ae514bb3d1b4b87e68e1aba7e0c9, type: 2}
+        m_Value: 109
+        m_BaseValue: 100
+        m_ModifiedValue: 9
+        m_EffectValue: 0
+        _layerCreationContext:
+          rid: -2
+        serializedStatModifiers: []
+    - rid: 4576332926529306831
+      type: {class: PrimaryStat, ns: StatAndEffects.Stat, asm: StatAndEffects}
+      data:
+        m_DigitAccuracy: 2
+        m_MaxModCapacity: 16
+        m_IsDirty: 0
+        m_StatDefinition: {fileID: 11400000, guid: 2de154f37205a0a4e8423cf9c33f4179, type: 2}
+        m_Value: 1.25
+        m_BaseValue: 1.25
+        m_ModifiedValue: 0
+        m_EffectValue: 0
+        _layerCreationContext:
+          rid: -2
+        serializedStatModifiers: []
+    - rid: 4576332942180614412
+      type: {class: PrimaryStat, ns: StatAndEffects.Stat, asm: StatAndEffects}
+      data:
+        m_DigitAccuracy: 2
+        m_MaxModCapacity: 16
+        m_IsDirty: 0
+        m_StatDefinition: {fileID: 11400000, guid: d4fd3527bace338469d70e025a0b2773, type: 2}
+        m_Value: 2
+        m_BaseValue: 2
+        m_ModifiedValue: 0
+        m_EffectValue: 0
+        _layerCreationContext:
+          rid: -2
+        serializedStatModifiers: []
+    - rid: 4576332942180614414
+      type: {class: VitalStat, ns: StatAndEffects.Stat, asm: StatAndEffects}
+      data:
+        m_DigitAccuracy: 2
+        m_MaxModCapacity: 16
+        m_IsDirty: 0
+        m_StatDefinition: {fileID: 11400000, guid: a5203ca9d27335e4b845d4d6e50ea803, type: 2}
+        m_Value: 107
+        m_BaseValue: 100
+        m_ModifiedValue: 7
+        m_EffectValue: 0
+        _layerCreationContext:
+          rid: -2
+        serializedStatModifiers: []
+        m_MinValue: 0
+        m_CurrentValue: 100
+    - rid: 4576332942180614757
+      type: {class: EffectOverTimePipeline, ns: StatAndEffects.Effects, asm: StatAndEffects}
+      data:
+        name: DamageOvertime
+        negate: 1
+        effectObject: {fileID: 11400000, guid: 84618a48d5c1d6b44b0404fea07115ab, type: 2}
+        tickInterval: 1
+        maxTicks: 5
+    - rid: 4576332942180614847
+      type: {class: InstantEffectPipeline, ns: StatAndEffects.Effects, asm: StatAndEffects}
+      data:
+        name: Damage
+        negate: 1
+        effectObject: {fileID: 11400000, guid: 84618a48d5c1d6b44b0404fea07115ab, type: 2}
+        result: 0
+    - rid: 4576332942180615022
+      type: {class: InstantEffectPipeline, ns: StatAndEffects.Effects, asm: StatAndEffects}
+      data:
+        name: CalculateDamage
+        negate: 0
+        effectObject: {fileID: 11400000, guid: 403ef849d090e7c4095bb4622a3c0dd0, type: 2}
+        result: 0
+--- !u!1660057539 &9223372036854775807
+SceneRoots:
+  m_ObjectHideFlags: 0
+  m_Roots:
+  - {fileID: 1787455318}
+  - {fileID: 1935338746}
+  - {fileID: 2015230722}
+  - {fileID: 171392274}
+  - {fileID: 792517187}
+  - {fileID: 1346974656}

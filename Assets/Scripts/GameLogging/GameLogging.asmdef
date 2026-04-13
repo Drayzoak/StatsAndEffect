@@ -1,0 +1,4 @@
+{
+  "name": "GameLogging",
+  "references":[ "UberLogger" ]
+}
