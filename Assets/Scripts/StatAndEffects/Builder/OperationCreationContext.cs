@@ -40,7 +40,6 @@ namespace StatAndEffects.Builder
             operations?.OnBeforeSerialize();
         }
         
-        public IEnumerable<KeyValuePair<StatModifierType, int>> Enumerable => operations.Enumerable();
         
     }
 }

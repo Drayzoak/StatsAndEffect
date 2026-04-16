@@ -37,16 +37,15 @@
 }
 
 #AbstactField .unity-float-field > .unity-float-field__input {
-    flex-grow: 0;
-    flex-shrink: 0;
+    flex-grow: 1;
+    flex-shrink: 1;
     flex-direction: row-reverse;
     justify-content: flex-start;
     align-self: flex-end;
     -unity-text-align: upper-right;
     align-items: stretch;
     align-content: flex-start;
-    min-width: 60px;
-    max-width: 60px;
+    min-width: 30px;
 }
 
 #AbstactField .unity-float-field > .unity-float-field__label {
@@ -88,7 +87,39 @@
 #Foldout > #VitalStat > #Slider > .unity-slider__input > #unity-drag-container > #unity-tracker > #unity-fill {
     background-color: rgb(3, 205, 245);
 }
-.unity-tab__header
-{
-    padding: 0 8 0 8;
+
+.unity-tab__header {
+    padding: 0 8px 0 8px;
+}
+
+#Foldout > #LevelStat > VisualElement > .unity-base-field {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-direction: row;
+    min-width: 50%;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 1px;
+    padding-right: 1px;
+    padding-bottom: 1px;
+    padding-left: 1px;
+    max-width: 50%;
+}
+
+#Foldout > #LevelStat > VisualElement > .unity-base-field > .unity-base-field__label--with-dragger {
+    min-width: 50%;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    flex-shrink: 0;
+    flex-grow: 0;
+}
+
+#Foldout > #LevelStat > VisualElement > .unity-base-field > #unity-text-input {
+    flex-shrink: 1;
+    flex-grow: 1;
+    min-width: 50%;
 }

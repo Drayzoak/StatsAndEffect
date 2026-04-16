@@ -7,71 +7,114 @@ using ZLinq;
 namespace StatAndEffects.Modifiers
 {
     
-    public class LayeredModifierCollection
+    public sealed partial class LayeredModifierCollection 
     {
-        private readonly Dictionary<StatLayer,ModifierCollection> _layers;
-        private readonly Dictionary<StatModifierType, List<ModifierOperationBase>> _operations;
+        private Dictionary<StatLayer,ModifierCollection> _layers;
+        private Dictionary<StatModifierType, List<ModifierOperationBase>> _operations;
         
         private bool _isDirty = true;
         private float _cachedValue;
         private float _lastBaseValue;
-
-        private readonly List<StatModifier> _tempCache;
-
+        private List<StatModifier> _tempCache;
+        
+        [SerializeField]
+        private int _capacity;
+        private bool _initialized;
+        
         public ModifierCollection this[StatLayer layer] => this._layers[layer];
 
         public LayeredModifierCollection(int capacity = 16)
         {
-            this._layers = Registry.CreateDefaultLayers(capacity);
-            this._operations = new();
-            
-            foreach (ModifierCollection value in this._layers.Values.AsValueEnumerable()) 
-            {
-                foreach (KeyValuePair<StatModifierType, ModifierOperationBase> operation in value.Enumerable)
-                {
-                    if (!this._operations.ContainsKey(operation.Key))
-                        this._operations.Add(operation.Key, new List<ModifierOperationBase>());
-                    this._operations[operation.Key].Add(operation.Value);
-                }
-            }
-            this._tempCache = new(capacity*2);
+            this._capacity = capacity;
+            this.Initialize();
         }
 
         public LayeredModifierCollection(LayerCreationContext layerCreationContext)
         {
-            if (layerCreationContext == null || layerCreationContext.layers == null)
-            {
-                throw new ArgumentNullException(nameof(layerCreationContext), "LayerCreationContext is null or invalid");
-            }
-
-            int layerCount = layerCreationContext.layers.Count;
-
-            _layers = new Dictionary<StatLayer, ModifierCollection>(layerCount);
-            _operations = new Dictionary<StatModifierType, List<ModifierOperationBase>>(8);
-            
-            foreach (var pair in layerCreationContext.layers)
-            {
-                if (pair.Value == null)
-                    continue;
-
-                ModifierCollection modifierCollection = new ModifierCollection(pair.Value);
-                _layers.Add(pair.Key, modifierCollection);
-                
-                foreach (KeyValuePair<StatModifierType, ModifierOperationBase> operation in modifierCollection.Enumerable)
-                {
-                    if (!this._operations.ContainsKey(operation.Key))
-                        this._operations.Add(operation.Key, new List<ModifierOperationBase>(8));
-                    this._operations[operation.Key].Add(operation.Value);
-                }
-            }
-            
+            this._layerCreationContext = layerCreationContext;
+            this.Initialize();
         }
 
 
+        private void Initialize()
+        {
+            if (_initialized)
+                return;
+
+            if (_layerCreationContext != null &&
+                _layerCreationContext.layers != null &&
+                _layerCreationContext.layers.Count > 0)
+            {
+                CreateFromContext();
+            }
+            else
+            {
+                CreateDefault();
+            }
+
+            _initialized = true;
+        }
+        
+        private void CreateDefault()
+        {
+            _layers = Registry.CreateDefaultLayers(this._capacity);
+            
+            _operations = new Dictionary<StatModifierType, List<ModifierOperationBase>>();
+
+            foreach (var value in _layers.Values.AsValueEnumerable())
+            {
+                foreach (var operation in value.AsValueEnumerable())
+                {
+                    if (!_operations.TryGetValue(operation.Key, out var list))
+                    {
+                        list = new List<ModifierOperationBase>();
+                        _operations.Add(operation.Key, list);
+                    }
+
+                    list.Add(operation.Value);
+                }
+            }
+
+            _tempCache = new List<StatModifier>(32);
+        }
+        
+        private void CreateFromContext()
+        {
+            _layerCreationContext.layers.EnsureInitialized();
+
+            int layerCount = _layerCreationContext.layers.Count;
+
+            _layers = new Dictionary<StatLayer, ModifierCollection>(layerCount);
+            _operations = new Dictionary<StatModifierType, List<ModifierOperationBase>>(this._layerCreationContext.operationsData.Count);
+
+            foreach (KeyValuePair<StatLayer, OperationCreationContext> pair in _layerCreationContext.layers.AsValueEnumerable())
+            {
+                OperationCreationContext operationContext = pair.Value;
+                if (pair.Value == null)
+                    continue;
+
+                var modifierCollection = new ModifierCollection(operationContext);
+                _layers.Add(pair.Key, modifierCollection);
+
+                foreach (var operation in modifierCollection)
+                {
+                    if (!_operations.TryGetValue(operation.Key, out var list))
+                    {
+                        list = new List<ModifierOperationBase>(operationContext.operations[operation.Key]);
+                        _operations.Add(operation.Key, list);
+                    }
+
+                    list.Add(operation.Value);
+                }
+            }
+
+            _tempCache = new List<StatModifier>(32);
+        }
         public void MarkDirty() => this._isDirty = true;
 
         public float Evaluate(float baseValue)
         {
+            this.Initialize();
             if (!this._isDirty && Mathf.Approximately(baseValue, this._lastBaseValue))
                 return this._cachedValue;
 

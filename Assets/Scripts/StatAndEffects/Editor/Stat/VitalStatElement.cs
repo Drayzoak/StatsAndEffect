@@ -19,7 +19,7 @@ namespace StatAndEffects.Editor.Stat
             _minValueField      = this.Q<FloatField>("MinValue");
             _maxValueField      = this.Q<Label>("MaxValue");
             _currentValueLabel  = this.Q<Label>("CurrentValue");
-            this._slider             = this.Q<Slider>("Slider");
+            _slider             = this.Q<Slider>("Slider");
             
         }
         protected override void LoadUxml()
@@ -35,28 +35,33 @@ namespace StatAndEffects.Editor.Stat
             VitalStat stat = (VitalStat)dataSource;
 
             this._vitalElement.style.display = DisplayStyle.Flex;
-            this._slider.SetValueWithoutNotify(stat.CurrentValue);
-            DataBindingHelper.BindTwoWay(this._slider,
+            
+            this._currentValueLabel.text = stat.CurrentValue.ToString();
+            DataBindingHelper.BindOneWay(this._currentValueLabel,
                 new PropertyPath(nameof(VitalStat.CurrentValue)));
-
-            DataBindingHelper.Bind(this._slider,
-                new PropertyPath(nameof(VitalStat.MinValue)),
-                BindingMode.ToTarget,
-                "lowValue");
-
-            DataBindingHelper.Bind(this._slider,
-                new PropertyPath(nameof(VitalStat.Value)),
-                BindingMode.ToTarget,
-                "highValue");
             
             this._minValueField.SetValueWithoutNotify(stat.MinValue);
             DataBindingHelper.BindTwoWay(_minValueField,
                 new PropertyPath(nameof(VitalStat.MinValue)));
             
             this._maxValueField.text = stat.Value.ToString();
-            DataBindingHelper.BindOneWay(this._maxValueField,new PropertyPath(nameof(VitalStat.Value)));
-            this._currentValueLabel.text = stat.CurrentValue.ToString();
-            DataBindingHelper.BindOneWay(this._currentValueLabel,new PropertyPath(nameof(VitalStat.CurrentValue)));
+            DataBindingHelper.BindOneWay(this._maxValueField,
+                new PropertyPath(nameof(VitalStat.Value)));
+            
+            this._slider.SetValueWithoutNotify(stat.CurrentValue);
+            DataBindingHelper.BindTwoWay(this._slider,
+                new PropertyPath(nameof(VitalStat.CurrentValue)));
+            
+            DataBindingHelper.Bind(this._slider,
+                new PropertyPath(nameof(VitalStat.Value)),
+                BindingMode.ToTarget,
+                "highValue");
+            
+            DataBindingHelper.Bind(this._slider,
+                new PropertyPath(nameof(VitalStat.MinValue)),
+                BindingMode.ToTarget,
+                "lowValue");
+            
         }
     }
 }

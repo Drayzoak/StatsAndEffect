@@ -10,6 +10,7 @@ namespace StatAndEffects.Stat
     public class LevelStat : AbstractStat
     {
         [SerializeField, DontCreateProperty] private int m_Level = 1;
+        [SerializeField, DontCreateProperty] private int m_MaxLevel = 1;
         [SerializeField, DontCreateProperty] private float m_CurrentXp = 0f;
 
         [SerializeField] private float m_BaseXp = 100f;
@@ -27,7 +28,20 @@ namespace StatAndEffects.Stat
             set
             {
                 if (value == m_Level) return;
-                m_Level = value;
+                m_Level = Mathf.Clamp(value, 0, m_MaxLevel);
+                NotifyPropertyChanged();
+                RecalculateBaseXp();
+            }
+        }
+
+        [CreateProperty]
+        public int MaxLevel
+        {
+            get => m_MaxLevel;
+            set
+            {
+                if (value == m_MaxLevel) return;
+                m_MaxLevel = value;
                 NotifyPropertyChanged();
                 RecalculateBaseXp();
             }
@@ -49,6 +63,31 @@ namespace StatAndEffects.Stat
         [CreateProperty]
         public float XpRequiredToLevelUp => Value;
 
+        [CreateProperty]
+        public float BaseXp
+        {
+            get => m_BaseXp;
+            set
+            {
+                if (Mathf.Approximately(value, this.m_BaseXp)) return;
+                m_BaseXp = Mathf.Clamp(value, 0f, XpRequiredToLevelUp);
+                NotifyPropertyChanged();
+                this.RecalculateBaseXp();
+            }
+        }
+
+        [CreateProperty]
+        public float GrowthFactor
+        {
+            get => m_Growth;
+            set
+            {
+                if (Mathf.Approximately(value, this.m_Growth)) return;
+                this.m_Growth = value > 0 ? value : 1f;
+                NotifyPropertyChanged();
+                this.RecalculateBaseXp();
+            }
+        }
         #endregion
 
         #region Constructors
@@ -56,6 +95,7 @@ namespace StatAndEffects.Stat
         
         public LevelStat() : base()
         {
+            this.m_XpModifiersCollection = new LayeredModifierCollection();
         }
 
         
@@ -63,9 +103,15 @@ namespace StatAndEffects.Stat
             string statDefinition = "NN",
             int digitAccuracy = DEFAULT_DIGIT_ACCURACY,
             int modsMaxCapacity = DEFAULT_LIST_CAPACITY,
-            LayerCreationContext layerCreationContext = null)
+            LayerCreationContext layerCreationContext = null,
+            LayerCreationContext XpLayerCreationContext = null)
             : base(CalculateBaseXp(level, baseXp, growth),statDefinition, digitAccuracy, modsMaxCapacity, layerCreationContext)
         {
+            if (XpLayerCreationContext == null)
+                this.m_XpModifiersCollection = new LayeredModifierCollection();
+            else
+                this.m_XpModifiersCollection = new LayeredModifierCollection(XpLayerCreationContext);
+            
             Initialize(level, baseXp, growth);
         }
 

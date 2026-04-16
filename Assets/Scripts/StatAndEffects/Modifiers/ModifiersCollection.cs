@@ -1,21 +1,24 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Common.Extensions;
 using StatAndEffects.Builder;
+using StatAndEffects.Stat;
 using ZLinq;
 using ZLinq.Linq;
 
 namespace StatAndEffects.Modifiers
 {
-    public class ModifierCollection
+    public class ModifierCollection : IEnumerable<KeyValuePair<StatModifierType, ModifierOperationBase>>
     {
         private readonly SortedList<StatModifierType, ModifierOperationBase> _operations;
         private readonly List<StatModifier> _cache;
 
         public IEnumerable<ModifierOperationBase> Operations => _operations.Values;
         public IEnumerable<StatModifierType> Getkey => this._operations.Keys;
+        
         public ModifierOperationBase this[StatModifierType type] => this._operations[type];
-        public ValueEnumerable<FromEnumerable<KeyValuePair<StatModifierType, ModifierOperationBase>>, KeyValuePair<StatModifierType, ModifierOperationBase>> Enumerable => this._operations.AsValueEnumerable();
+        
         public ModifierCollection(int capacity)
         {
             int opCount = EnumExtension.Length<StatModifierType>();
@@ -149,5 +152,13 @@ namespace StatAndEffects.Modifiers
         }
         private static readonly List<StatModifier> EmptyList = new(0);
 
+        public IEnumerator<KeyValuePair<StatModifierType, ModifierOperationBase>> GetEnumerator()
+        {
+            return this._operations.GetEnumerator();
+        }
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return this.GetEnumerator();
+        }
     }
 }

@@ -47,7 +47,7 @@ namespace StatAndEffects.Stat
             }
         }
 
-        [SerializeField]
+        [SerializeReference]
         private LayeredModifierCollection _modifiersCollection;
         public LayeredModifierCollection ModifiersCollection  => _modifiersCollection;
 
@@ -109,7 +109,7 @@ namespace StatAndEffects.Stat
             {
                 if(Mathf.Approximately(m_BaseValue,value)) return ;
                 
-                m_BaseValue = value;
+                m_BaseValue = (float)Math.Round(value,DigitAccuracy);
                 
                 this.NotifyPropertyChanged();
                 IsDirty = true;
@@ -161,36 +161,28 @@ namespace StatAndEffects.Stat
         {
             m_DigitAccuracy = digitAccuracy;
             m_MaxModCapacity = modsMaxCapacity;
-            _layerCreationContext = layerCreationContext;
 
             if (!string.IsNullOrEmpty(statDefinition))
             {
                 m_StatDefinition = StatAbilitiesManager.TryToGetValue(statDefinition);
             }
-            InitializeLayerCollection();
+            
+            if (layerCreationContext != null)
+                _modifiersCollection = new LayeredModifierCollection(layerCreationContext);
+            else
+                _modifiersCollection = new LayeredModifierCollection(modsMaxCapacity);
             BaseValue = baseValue;
-
+            
         }
 
         protected AbstractStat()
         {
             m_DigitAccuracy = DEFAULT_DIGIT_ACCURACY;
             m_MaxModCapacity = DEFAULT_LIST_CAPACITY;
-            this.InitializeLayerCollection();
+            
+            this._modifiersCollection  = new LayeredModifierCollection();
         }
         
-        private void InitializeLayerCollection()
-        {
-            Debug.Log($"Initializing layer collection {this.IsValidLayerContext()}");
-            if (IsValidLayerContext())
-            {
-                _modifiersCollection = new LayeredModifierCollection(_layerCreationContext);
-            }
-            else
-            {
-                _modifiersCollection = new LayeredModifierCollection(m_MaxModCapacity);
-            }
-        }
 
         private float CalculateModifiedValue(int digitAccuracy)
         {

@@ -49,6 +49,9 @@ namespace StatAndEffects.Editor
                 case nameof(PrimaryStat):
                     statElement = new PrimaryStatElement();
                     break;
+                case nameof(LevelStat):
+                    statElement = new LevelStatElement();
+                    break;
                 default:
                     statElement = new PrimaryStatElement();
                     break;

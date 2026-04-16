@@ -7,6 +7,7 @@ using StatAndEffects.Stat;
 using Unity.Properties;
 using UnityEditor;
 using UnityEditor.UIElements;
+using UnityEngine;
 using UnityEngine.UIElements;
 using Object = UnityEngine.Object;
 
@@ -21,31 +22,42 @@ namespace StatAndEffects.Editor.Stat
         private FloatField _baseValueField;
         private FloatField _modifiedValueField;
         private Label _valueField;
-        private VisualElement _tabField;
         private Foldout _foldout;
-        private SerializedProperty _property;
 
-        private LayerCollectionTabView _layerCollectionTabView;
+        private readonly LayerCollectionTabView _layerCollectionTabView = new LayerCollectionTabView();
 
+        protected SerializedProperty _property;
+        protected VisualElement _tabField;
         public string Name
         {
             set => this._foldout.text = value;            
         }
-        protected AbstractStatElement()
-        {
-            this._layerCollectionTabView = new LayerCollectionTabView();
-        }
-        
+
         public void Initialize()
         {
             this.LoadUxml();
+            this.style.marginTop = 2;
+            this.style.borderBottomColor = Color.black;
+            this.style.borderBottomWidth = 1;
             this.CacheElements();
             this.CacheChildElement();
             this.BindCommonFields();
             this.BindElements();
-            this._layerCollectionTabView.Initialize((dataSource as AbstractStat)?.ModifiersCollection,this._property);
+            this.CreateFields();
         }
 
+        protected virtual void CreateFields()
+        {
+            this._layerCollectionTabView.Initialize((dataSource as AbstractStat)?.ModifiersCollection,this._property);
+            Foldout f = new Foldout()
+            {
+                text = "Base Value Modifiers",
+                value = false,
+            };
+            f.Add(this._layerCollectionTabView);
+            this._tabField.Add(f);
+
+        }
         protected virtual void CacheChildElement()
         {
             
@@ -73,7 +85,6 @@ namespace StatAndEffects.Editor.Stat
 
             this._foldout = this.Q<Foldout>("Foldout");
 
-            this._tabField.Add(this._layerCollectionTabView);
             this._statTypeDropdown.RegisterValueChangedCallback(this.OnDropdownValueChanged);
             this._statObjectField.RegisterValueChangedCallback(this.OnStatObjectChange);
         }
@@ -119,9 +130,6 @@ namespace StatAndEffects.Editor.Stat
             this._foldout.text = stat.StatDefinition ? stat.StatDefinition.DisplayName : "Stat";
         }
 
-
-        
-
         private void ResetElement()
         {
             this.Unbind();
@@ -154,8 +162,4 @@ namespace StatAndEffects.Editor.Stat
         }
     }
 
-    public class PrimaryStatElement : AbstractStatElement
-    {
-
-    }
 }

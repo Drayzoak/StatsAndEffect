@@ -16,16 +16,27 @@
             </ui:VisualElement>
             <ui:Slider label="" value="0" high-value="100" fill="true" show-input-field="false" inverted="false" name="Slider" style="align-items: auto;"/>
         </ui:VisualElement>
+        <ui:VisualElement name="LevelStat" style="flex-grow: 1; flex-direction: column; flex-wrap: nowrap;">
+            <ui:VisualElement style="flex-grow: 0; flex-direction: row; flex-shrink: 0;">
+                <ui:IntegerField label="Level" value="42" name="Level"/>
+                <ui:IntegerField label="Max Level" value="42" name="MaxLevel"/>
+            </ui:VisualElement>
+            <ui:VisualElement style="flex-grow: 1; flex-direction: row;">
+                <ui:FloatField label="BaseXp" value="42.2" name="BaseXp"/>
+                <ui:FloatField label="Growth" value="42.2" name="Growth"/>
+            </ui:VisualElement>
+        </ui:VisualElement>
         <ui:VisualElement name="AbstactField" style="flex-grow: 1; flex-direction: row;">
             <ui:VisualElement style="flex-grow: 1; flex-direction: row; flex-shrink: 0;">
-                <ui:FloatField label="XP" value="23" name="BaseValue" style="flex-shrink: 0; flex-direction: row-reverse; flex-grow: 1;"/>
+                <ui:FloatField label="XP" value="23" name="BaseValue" style="flex-shrink: 1; flex-direction: row-reverse; flex-grow: 1;"/>
                 <ui:Label text="+" style="padding-top: 3px;"/>
-                <ui:FloatField label="MD XP =" value="23" name="ModifiedValue" readonly="true" style="-unity-text-align: upper-left; flex-shrink: 0; flex-direction: row-reverse; flex-grow: 1;"/>
+                <ui:FloatField label="MD XP =" value="23" name="ModifiedValue" readonly="true" style="-unity-text-align: upper-left; flex-shrink: 1; flex-direction: row-reverse; flex-grow: 1;"/>
             </ui:VisualElement>
-            <ui:Label text="10000" name="Value" style="flex-grow: 0; max-width: 65px; align-self: flex-start; padding-top: 3px; min-width: 65px; margin-top: 1px; -unity-text-align: upper-center;"/>
-            <ui:Label text="REQ Xp" name="" style="flex-grow: 0; align-self: flex-start; padding-top: 3px; margin-top: 1px; -unity-text-align: upper-center; flex-shrink: 0;"/>
+            <ui:VisualElement style="flex-grow: 1; flex-direction: row;">
+                <ui:Label text="10000" name="Value" style="flex-grow: 1; align-self: flex-start; padding-top: 3px; min-width: 30px; margin-top: 1px; -unity-text-align: upper-center; flex-shrink: 0;"/>
+                <ui:Label text="REQ Xp" name="" style="flex-grow: 1; align-self: flex-start; padding-top: 3px; margin-top: 1px; -unity-text-align: upper-center; flex-shrink: 0;"/>
+            </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="TabField" style="flex-grow: 1;"/>
     </ui:Foldout>
-    <ui:TabView/>
 </ui:UXML>

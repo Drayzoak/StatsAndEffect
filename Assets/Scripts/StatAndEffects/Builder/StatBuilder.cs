@@ -54,6 +54,7 @@ namespace StatAndEffects.Builder
         
         public LayerCreationContext Build()
         {
+            this.layerCreationContext.InitializeData();
             return layerCreationContext;
         }
         
