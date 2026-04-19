@@ -1,0 +1,18 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <Style src="project://database/Assets/Scripts/StatAndEffects/Editor/Style/StatDrawerStyle.uss?fileID=7433441132597879392&amp;guid=a3620dea811325f419c05763029ef868&amp;type=3#StatDrawerStyle"/>
+    <ui:Foldout name="Foldout" text="wdasd" style="margin-bottom: 2px; margin-right: 4px;">
+        <ui:VisualElement name="StatDefinations" style="flex-grow: 1; flex-direction: row; margin-left: 0; margin-top: 0; margin-right: 0; margin-bottom: 0;">
+            <uie:ObjectField label="Stat Obj" name="StatObject" type="StatAndEffects.Stat.StatDefinition, StatAndEffects" style="max-width: 69%; flex-grow: 1;"/>
+            <ui:DropdownField choices="PrimaryStat,VitalStat,LevelStat" index="0" name="StatType" style="flex-shrink: 1; flex-grow: 1;"/>
+        </ui:VisualElement>
+        <ui:VisualElement name="AbstactField" style="flex-grow: 1; flex-direction: row;">
+            <ui:VisualElement style="flex-grow: 1; flex-direction: row; flex-shrink: 0;">
+                <ui:FloatField label="Value" value="23" name="BaseValue" style="flex-grow: 1; flex-direction: row-reverse;"/>
+                <ui:Label text="+" style="padding-top: 3px;"/>
+                <ui:FloatField label="MValue =" value="23" name="ModifiedValue" readonly="true" style="-unity-text-align: upper-left; flex-grow: 1; flex-direction: row-reverse;"/>
+            </ui:VisualElement>
+            <ui:Label text="10000" name="Value" style="flex-grow: 0.1; align-self: flex-start; padding-top: 3px; min-width: 30px; margin-top: 1px; -unity-text-align: upper-center; flex-shrink: 0;"/>
+        </ui:VisualElement>
+        <ui:VisualElement name="TabField" style="flex-grow: 1;"/>
+    </ui:Foldout>
+</ui:UXML>

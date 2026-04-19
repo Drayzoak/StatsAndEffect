@@ -1,0 +1,20 @@
+{
+    "name": "StatAndEffects",
+    "rootNamespace": "",
+    "references": [
+        "GUID:a1539a3bad535d549ad58c5f23b70bb1",
+        "GUID:1472780b2bb04b56a993c5cf76a8c3f2",
+        "GUID:1878a5fece5b40d5ab92024098fe8322",
+        "GUID:9e9a2ee17b40b6448a8d83d483b15685",
+        "SerializableDictionary"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
