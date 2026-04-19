@@ -556,3 +556,9 @@ Max ticks
 * IMPORTANT
 
 Use EntityStats For Effect Aa Effect is still in development need some improvement
+
+### NOtice
+This project uses the Apache License 2.0.
+Copyright 2026 Drayzoak
+
+This Project Is Reference From meredoth Stat-System https://github.com/meredoth/Stat-System
