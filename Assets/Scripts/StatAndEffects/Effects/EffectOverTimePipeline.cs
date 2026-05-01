@@ -12,6 +12,8 @@ namespace StatAndEffects.Effects
         public int Index { get; set; } = -1;
         public bool IsPaused { get; set; } = false;
         
+        
+        
         private float inputValue;
         public override void Initialize(IEntityStats stats)
         {
@@ -25,6 +27,7 @@ namespace StatAndEffects.Effects
             inputValue = value;
         }
 
+        
         public void OnTick(int delta)
         {
             if (IsPaused) return;

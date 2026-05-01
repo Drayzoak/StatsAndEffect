@@ -7,7 +7,6 @@ namespace StatAndEffects.Effects
         public float result;
         public override void ExecuteEffect(float value = 1)
         {
-
             this.result = ProcessInternal(value);
         }
     }

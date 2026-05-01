@@ -16,4 +16,5 @@ namespace StatAndEffects.Modifiers
             return baseValue * additiveModifierValue;
         }
     }
+
 }

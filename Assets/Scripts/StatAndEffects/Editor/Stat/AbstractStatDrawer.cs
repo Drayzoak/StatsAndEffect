@@ -8,33 +8,34 @@ using UnityEditor;
 
 namespace StatAndEffects.Editor
 {
-    [CustomPropertyDrawer(typeof(AbstractStat), true)]
+    [CustomPropertyDrawer(typeof(AbstractStat))]
     public class AbstractStatDrawer : PropertyDrawer
     {
         public override VisualElement CreatePropertyGUI(SerializedProperty property)
         {
             var container = new VisualElement();
             
+            if (property.propertyType != SerializedPropertyType.ManagedReference)
+            {
+                return null;
+            }
             
             if (property.managedReferenceValue == null)
             {
-                Type fieldType = null;
                 
-                if (!string.IsNullOrEmpty(property.managedReferenceFullTypename))
-                {
-                    fieldType = Type.GetType(property.managedReferenceFullTypename);
-                }
-                
-                if (fieldType == null)
-                {
-                    fieldType = property.GetManagedReferenceFieldType();
-                }
-                
-                if (fieldType == null || fieldType.IsAbstract || !typeof(AbstractStat).IsAssignableFrom(fieldType))
-                {
-                    fieldType = typeof(PrimaryStat); 
-                }
+                // Extract base type from field
+                var fieldType = fieldInfo.FieldType;
 
+                // Handle List<T> or arrays
+                if (fieldType.IsArray)
+                    fieldType = fieldType.GetElementType();
+
+                if (fieldType.IsGenericType)
+                    fieldType = fieldType.GetGenericArguments()[0];
+
+                if (fieldType.IsAbstract)
+                    fieldType = typeof(PrimaryStat);
+                
                 var instance = Activator.CreateInstance(fieldType);
                 property.managedReferenceValue = instance;
                 property.serializedObject.ApplyModifiedProperties();
@@ -52,6 +53,9 @@ namespace StatAndEffects.Editor
                 case nameof(LevelStat):
                     statElement = new LevelStatElement();
                     break;
+                case nameof(AttributeStat):
+                    statElement = new AttributeStatElement();
+                    break;
                 default:
                     statElement = new PrimaryStatElement();
                     break;
@@ -64,20 +68,39 @@ namespace StatAndEffects.Editor
             bool isListStat = property.IsInArray();
             int index = property.GetArrayIndex();
             
+            
             statElement.changeStatType = ( className) =>
             {
                 ReplaceStatInstance(property, className);
             };
 
+            
             statElement.SetStat(
                 property.managedReferenceValue.GetType().Name,
                 index
             );
 
-            if (!isListStat)
-                statElement.Name = property.name;
-            statElement.SetTypeChangeEnabled(isListStat);
+            bool allowTypeChange = false;
 
+            if (isListStat)
+            {
+                var fieldType = fieldInfo.FieldType;                
+                
+                if (fieldType.IsArray)
+                    fieldType = fieldType.GetElementType();
+
+                if (fieldType.IsGenericType)
+                    fieldType = fieldType.GetGenericArguments()[0];
+
+                if (fieldType.IsAbstract)
+                    allowTypeChange = true;
+            }
+            else
+            {
+                statElement.Name = fieldInfo.Name;
+            }
+
+            statElement.SetTypeChangeEnabled(allowTypeChange);
             container.Add(statElement);
 
             return container;

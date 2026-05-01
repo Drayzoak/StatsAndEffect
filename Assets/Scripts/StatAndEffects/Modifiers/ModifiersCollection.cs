@@ -3,9 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Common.Extensions;
 using StatAndEffects.Builder;
-using StatAndEffects.Stat;
 using ZLinq;
-using ZLinq.Linq;
 
 namespace StatAndEffects.Modifiers
 {

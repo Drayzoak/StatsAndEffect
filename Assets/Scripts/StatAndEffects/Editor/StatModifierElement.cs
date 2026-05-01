@@ -12,7 +12,6 @@ namespace StatAndEffects.Editor
         private EnumField _enumField;
         
         public Action<StatModifier, StatModifierType> OnTypeChanged;
-        public Action OnValueChanged;
         
         public StatModifierElement()
         {
@@ -38,9 +37,7 @@ namespace StatAndEffects.Editor
             this._floatField.SetValueWithoutNotify(statModifier.Value);
             this._enumField.SetValueWithoutNotify(statModifier.Type);
             
-            DataBindingHelper.BindToSource(this._floatField, new PropertyPath(nameof(StatModifier.Value)));
-            this._floatField.RegisterValueChangedCallback(evt => this.OnValueChanged?.Invoke());
-            
+            DataBindingHelper.BindTwoWay(this._floatField, new PropertyPath(nameof(StatModifier.Value)));
             this._enumField.RegisterValueChangedCallback(this.OnModifierTypeChanged);
             
         }

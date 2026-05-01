@@ -12,8 +12,12 @@ namespace StatAndEffects.Effects
         public EffectObject effectObject;
         
         private List<Effect> processors = new List<Effect>();
-        
-        public void Add(Effect p) => this.processors.Add(p);
+
+        public EffectPipeline Add(Effect p)
+        {
+            this.processors.Add(p);
+            return this;
+        }
 
         public virtual void Initialize(IEntityStats stats)
         {

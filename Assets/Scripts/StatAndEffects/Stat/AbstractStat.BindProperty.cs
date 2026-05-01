@@ -9,17 +9,11 @@ namespace StatAndEffects.Stat
         protected long viewHash;
         public event EventHandler<BindablePropertyChangedEventArgs> propertyChanged;
         
-        public long GetViewHashCode() => this.viewHash;
-        
+        public long GetViewHashCode() => viewHash;
+
         protected void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
         {
-            this.viewHash++;
-            
-            if (this.IsDirty)
-            {
-                this.ModifiedValue = this.CalculateModifiedValue(this.m_DigitAccuracy);
-            }
-            
+            viewHash++;
             propertyChanged?.Invoke(this, new BindablePropertyChangedEventArgs(propertyName));
         }
     }

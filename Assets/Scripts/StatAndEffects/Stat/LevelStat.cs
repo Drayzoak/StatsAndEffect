@@ -3,6 +3,7 @@ using StatAndEffects.Builder;
 using StatAndEffects.Modifiers;
 using UnityEngine;
 using Unity.Properties;
+using UnityEngine.Serialization;
 
 namespace StatAndEffects.Stat
 {
@@ -14,7 +15,7 @@ namespace StatAndEffects.Stat
         [SerializeField, DontCreateProperty] private float m_CurrentXp = 0f;
 
         [SerializeField] private float m_BaseXp = 100f;
-        [SerializeField] private float m_Growth = 1.2f;
+        [SerializeField] private float _growthFactor = 1.2f;
 
         private LayeredModifierCollection m_XpModifiersCollection;
         public LayeredModifierCollection XPModifiersCollection => m_XpModifiersCollection;
@@ -79,11 +80,11 @@ namespace StatAndEffects.Stat
         [CreateProperty]
         public float GrowthFactor
         {
-            get => m_Growth;
+            get => this._growthFactor;
             set
             {
-                if (Mathf.Approximately(value, this.m_Growth)) return;
-                this.m_Growth = value > 0 ? value : 1f;
+                if (Mathf.Approximately(value, this._growthFactor)) return;
+                this._growthFactor = value > 0 ? value : 1f;
                 NotifyPropertyChanged();
                 this.RecalculateBaseXp();
             }
@@ -99,37 +100,33 @@ namespace StatAndEffects.Stat
         }
 
         
-        public LevelStat(int level, float baseXp, float growth,
+        public LevelStat(int level, int maxLevel,float baseXp, float growthFactor,
             string statDefinition = "NN",
             int digitAccuracy = DEFAULT_DIGIT_ACCURACY,
             int modsMaxCapacity = DEFAULT_LIST_CAPACITY,
             LayerCreationContext layerCreationContext = null,
             LayerCreationContext XpLayerCreationContext = null)
-            : base(CalculateBaseXp(level, baseXp, growth),statDefinition, digitAccuracy, modsMaxCapacity, layerCreationContext)
+            : base(CalculateBaseXp(level, baseXp, growthFactor),statDefinition, digitAccuracy, modsMaxCapacity, layerCreationContext)
         {
+            
             if (XpLayerCreationContext == null)
                 this.m_XpModifiersCollection = new LayeredModifierCollection();
             else
                 this.m_XpModifiersCollection = new LayeredModifierCollection(XpLayerCreationContext);
             
-            Initialize(level, baseXp, growth);
-        }
-
-        #endregion
-
-        #region Initialization
-
-        public void Initialize(int level, float baseXp, float growth)
-        {
+        
             m_Level = level;
+            m_MaxLevel = maxLevel;
             m_BaseXp = baseXp;
-            m_Growth = growth;
+            this._growthFactor = growthFactor;
             m_CurrentXp = 0f;
 
-            BaseValue = CalculateBaseXp(level, baseXp, growth);
+            BaseValue = CalculateBaseXp(level, baseXp, growthFactor);
+            
         }
 
         #endregion
+
 
         #region Core Logic
 
@@ -150,7 +147,7 @@ namespace StatAndEffects.Stat
         {
             m_Level++;
 
-            BaseValue = CalculateBaseXp(m_Level, m_BaseXp, m_Growth);
+            BaseValue = CalculateBaseXp(m_Level, m_BaseXp, this._growthFactor);
             IsDirty = true;
 
             OnLevelUp?.Invoke(m_Level);
@@ -158,7 +155,7 @@ namespace StatAndEffects.Stat
 
         private void RecalculateBaseXp()
         {
-            BaseValue = CalculateBaseXp(m_Level, m_BaseXp, m_Growth);
+            BaseValue = CalculateBaseXp(m_Level, m_BaseXp, this._growthFactor);
         }
 
         private static float CalculateBaseXp(int level, float baseXp, float growth)

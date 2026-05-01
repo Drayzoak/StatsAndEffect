@@ -1,4 +1,4 @@
 {
 	"name": "StatAndAbilities",
-	"references":[ "GUID:3737667a4df1ca242ab8abe7e571f87d", "GUID:a1539a3bad535d549ad58c5f23b70bb1" ]
+	"references":[ "GUID:3737667a4df1ca242ab8abe7e571f87d", "GUID:a1539a3bad535d549ad58c5f23b70bb1", "GUID:91e75d35d03b63a4ea09591f51444223", "MyUiTolkit" ]
 }

@@ -1,9 +1,11 @@
+using System;
 using Unity.Properties;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace StatAndEffects.Stat
 {
-    [CreateAssetMenu(menuName = "Stats/Stat Definition")]
+    [CreateAssetMenu(menuName = "StatAndEffects/Stat Definition")]
     public class StatDefinition : ScriptableObject
     {
         public int Id;

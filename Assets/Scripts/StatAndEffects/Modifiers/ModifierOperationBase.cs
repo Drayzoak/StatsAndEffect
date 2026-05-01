@@ -20,7 +20,7 @@ namespace StatAndEffects.Modifiers
 
         public bool TryAddModifier(StatModifier statModifier)
         {
-            if(this.HasCapacity() && !this.StatModifiers.Exists(t => t.Equals(statModifier) ))
+            if(this.HasCapacity() &&  !this.StatModifiers.Contains(statModifier))
             {
                 this.StatModifiers.Add(statModifier);
                 return true;

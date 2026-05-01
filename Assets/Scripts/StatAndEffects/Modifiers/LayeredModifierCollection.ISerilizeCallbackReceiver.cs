@@ -33,15 +33,18 @@ namespace StatAndEffects.Modifiers
         public void OnAfterDeserialize()
         {
             _initialized = false;
-
             Initialize();
 
             if (_serializedModifiers != null && _serializedModifiers.Count > 0)
             {
+                for (int i = 0; i < this._serializedModifiers.Count; i++)
+                {
+                    this._serializedModifiers[i] = this._serializedModifiers[i].Resolve();
+                }
                 TryAddModifiers(_serializedModifiers);
             }
 
-            _isDirty = true;
+            this._IsDirty = true;
         }
     }
 }

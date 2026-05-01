@@ -162,7 +162,7 @@ Transform:
   m_GameObject: {fileID: 171392272}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 125.150894, y: 16.640625, z: -456.86057}
+  m_LocalPosition: {x: 125.45, y: 16.640625, z: -456.86057}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -205,264 +205,6 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 792517185}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12.96857, y: 0, z: -384.07254}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1346974654
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1346974656}
-  - component: {fileID: 1346974655}
-  m_Layer: 0
-  m_Name: Example
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1346974655
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1346974654}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 105798989dfe49a9ae8a2729a569a439, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DefaultNamespace.Example
-  health:
-    rid: 3949958418890752813
-  mana:
-    rid: 3949958418890752814
-  sanity:
-    rid: 3949958418890752815
-  strength:
-    rid: 3949958418890752816
-  dexterity:
-    rid: 3949958418890752817
-  constitution:
-    rid: 3949958418890752818
-  references:
-    version: 2
-    RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
-    - rid: 3949958418890752813
-      type: {class: VitalStat, ns: StatAndEffects.Stat, asm: StatAndEffects}
-      data:
-        m_DigitAccuracy: 2
-        m_MaxModCapacity: 16
-        m_IsDirty: 0
-        m_StatDefinition: {fileID: 0}
-        m_Value: 8
-        m_BaseValue: 0
-        m_ModifiedValue: 8
-        m_EffectValue: 0
-        _layerCreationContext:
-          rid: -2
-        serializedStatModifiers:
-        - rid: 3949958418890752856
-        - rid: 3949958418890752857
-        - rid: 3949958418890752858
-        - rid: 3949958418890752859
-        - rid: 3949958418890752860
-        - rid: 3949958418890752861
-        - rid: 3949958418890752863
-        - rid: 3949958418890752864
-        m_MinValue: 0
-        m_CurrentValue: 0
-    - rid: 3949958418890752814
-      type: {class: VitalStat, ns: StatAndEffects.Stat, asm: StatAndEffects}
-      data:
-        m_DigitAccuracy: 2
-        m_MaxModCapacity: 16
-        m_IsDirty: 0
-        m_StatDefinition: {fileID: 0}
-        m_Value: 50
-        m_BaseValue: 50
-        m_ModifiedValue: 0
-        m_EffectValue: 0
-        _layerCreationContext:
-          rid: 3949958418890752819
-        serializedStatModifiers: []
-        m_MinValue: 0
-        m_CurrentValue: 30
-    - rid: 3949958418890752815
-      type: {class: VitalStat, ns: StatAndEffects.Stat, asm: StatAndEffects}
-      data:
-        m_DigitAccuracy: 2
-        m_MaxModCapacity: 16
-        m_IsDirty: 0
-        m_StatDefinition: {fileID: 0}
-        m_Value: 50
-        m_BaseValue: 50
-        m_ModifiedValue: 0
-        m_EffectValue: 0
-        _layerCreationContext:
-          rid: 3949958418890752820
-        serializedStatModifiers: []
-        m_MinValue: 0
-        m_CurrentValue: 40
-    - rid: 3949958418890752816
-      type: {class: PrimaryStat, ns: StatAndEffects.Stat, asm: StatAndEffects}
-      data:
-        m_DigitAccuracy: 2
-        m_MaxModCapacity: 16
-        m_IsDirty: 0
-        m_StatDefinition: {fileID: 0}
-        m_Value: 0
-        m_BaseValue: 0
-        m_ModifiedValue: 0
-        m_EffectValue: 0
-        _layerCreationContext:
-          rid: -2
-        serializedStatModifiers: []
-    - rid: 3949958418890752817
-      type: {class: PrimaryStat, ns: StatAndEffects.Stat, asm: StatAndEffects}
-      data:
-        m_DigitAccuracy: 2
-        m_MaxModCapacity: 2
-        m_IsDirty: 0
-        m_StatDefinition: {fileID: 0}
-        m_Value: 5
-        m_BaseValue: 5
-        m_ModifiedValue: 0
-        m_EffectValue: 0
-        _layerCreationContext:
-          rid: 3949958418890752821
-        serializedStatModifiers: []
-    - rid: 3949958418890752818
-      type: {class: PrimaryStat, ns: StatAndEffects.Stat, asm: StatAndEffects}
-      data:
-        m_DigitAccuracy: 2
-        m_MaxModCapacity: 2
-        m_IsDirty: 0
-        m_StatDefinition: {fileID: 0}
-        m_Value: 10
-        m_BaseValue: 10
-        m_ModifiedValue: 0
-        m_EffectValue: 0
-        _layerCreationContext:
-          rid: 3949958418890752822
-        serializedStatModifiers: []
-    - rid: 3949958418890752819
-      type: {class: LayerCreationContext, ns: StatAndEffects.Builder, asm: StatAndEffects}
-      data:
-        layers:
-          keys: 0000000001000000
-          values:
-          - operations:
-              keys: 00000000
-              values: 18000000
-          - operations:
-              keys: 000000000100000002000000
-              values: 180000001800000018000000
-    - rid: 3949958418890752820
-      type: {class: LayerCreationContext, ns: StatAndEffects.Builder, asm: StatAndEffects}
-      data:
-        layers:
-          keys: 000000000100000002000000
-          values:
-          - operations:
-              keys: 000000000100000002000000
-              values: 180000001800000018000000
-          - operations:
-              keys: 000000000100000002000000
-              values: 180000001800000018000000
-          - operations:
-              keys: 000000000100000002000000
-              values: 180000001800000018000000
-    - rid: 3949958418890752821
-      type: {class: LayerCreationContext, ns: StatAndEffects.Builder, asm: StatAndEffects}
-      data:
-        layers:
-          keys: 00000000
-          values:
-          - operations:
-              keys: 00000000
-              values: 18000000
-    - rid: 3949958418890752822
-      type: {class: LayerCreationContext, ns: StatAndEffects.Builder, asm: StatAndEffects}
-      data:
-        layers:
-          keys: 000000000100000002000000
-          values:
-          - operations:
-              keys: 000000000100000002000000
-              values: 180000001800000018000000
-          - operations:
-              keys: 000000000100000002000000
-              values: 180000001800000018000000
-          - operations:
-              keys: 000000000100000002000000
-              values: 180000001800000018000000
-    - rid: 3949958418890752856
-      type: {class: StatModifier, ns: StatAndEffects.Modifiers, asm: StatAndEffects}
-      data:
-        type: 0
-        layer: 0
-        value: 1
-    - rid: 3949958418890752857
-      type: {class: StatModifier, ns: StatAndEffects.Modifiers, asm: StatAndEffects}
-      data:
-        type: 0
-        layer: 0
-        value: 1
-    - rid: 3949958418890752858
-      type: {class: StatModifier, ns: StatAndEffects.Modifiers, asm: StatAndEffects}
-      data:
-        type: 0
-        layer: 0
-        value: 1
-    - rid: 3949958418890752859
-      type: {class: StatModifier, ns: StatAndEffects.Modifiers, asm: StatAndEffects}
-      data:
-        type: 0
-        layer: 0
-        value: 1
-    - rid: 3949958418890752860
-      type: {class: StatModifier, ns: StatAndEffects.Modifiers, asm: StatAndEffects}
-      data:
-        type: 0
-        layer: 0
-        value: 1
-    - rid: 3949958418890752861
-      type: {class: StatModifier, ns: StatAndEffects.Modifiers, asm: StatAndEffects}
-      data:
-        type: 0
-        layer: 0
-        value: 1
-    - rid: 3949958418890752863
-      type: {class: StatModifier, ns: StatAndEffects.Modifiers, asm: StatAndEffects}
-      data:
-        type: 0
-        layer: 0
-        value: 1
-    - rid: 3949958418890752864
-      type: {class: StatModifier, ns: StatAndEffects.Modifiers, asm: StatAndEffects}
-      data:
-        type: 0
-        layer: 0
-        value: 1
---- !u!4 &1346974656
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1346974654}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -12.96857, y: 0, z: -384.07254}
@@ -558,6 +300,329 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1831711905
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1831711907}
+  - component: {fileID: 1831711906}
+  m_Layer: 0
+  m_Name: Example
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1831711906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1831711905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 105798989dfe49a9ae8a2729a569a439, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DefaultNamespace.Example
+  health:
+    m_DigitAccuracy: 2
+    m_MaxModCapacity: 16
+    m_StatDefinition: {fileID: 0}
+    m_BaseValue: 0
+    m_FinalValue: 0
+    m_ModifiedValue: 0
+    m_IsDirty: 0
+    _modifiersCollection:
+      rid: 3949958629257905080
+    m_MinValue: 0
+    m_CurrentValue: 0
+  mana:
+    rid: 3949958629257905081
+  sanity:
+    rid: 3949958629257905082
+  strength:
+    rid: 3949958629257905083
+  dexterity:
+    rid: 3949958629257905084
+  constitution:
+    rid: 3949958629257905085
+  playerLevel:
+    rid: 3949958629257905086
+  characterLevel:
+    rid: 3949958629257905087
+  BaseModifiers:
+  - type: 100
+    layer: 0
+    value: 10
+    guid: 
+  - type: 200
+    layer: 0
+    value: 20
+    guid: 
+  - type: 300
+    layer: 0
+    value: 30
+    guid: 
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 3949958629257905080
+      type: {class: LayeredModifierCollection, ns: StatAndEffects.Modifiers, asm: StatAndEffects}
+      data:
+        _layerCreationContext:
+          rid: -2
+        _serializedModifiers: []
+        _capacity: 16
+    - rid: 3949958629257905081
+      type: {class: VitalStat, ns: StatAndEffects.Stat, asm: StatAndEffects}
+      data:
+        m_DigitAccuracy: 2
+        m_MaxModCapacity: 16
+        m_StatDefinition: {fileID: 0}
+        m_BaseValue: 50
+        m_FinalValue: 0
+        m_ModifiedValue: 0
+        m_IsDirty: 0
+        _modifiersCollection:
+          rid: 3949958629257905088
+        m_MinValue: 0
+        m_CurrentValue: 30
+    - rid: 3949958629257905082
+      type: {class: VitalStat, ns: StatAndEffects.Stat, asm: StatAndEffects}
+      data:
+        m_DigitAccuracy: 2
+        m_MaxModCapacity: 16
+        m_StatDefinition: {fileID: 0}
+        m_BaseValue: 50
+        m_FinalValue: 0
+        m_ModifiedValue: 0
+        m_IsDirty: 0
+        _modifiersCollection:
+          rid: 3949958629257905089
+        m_MinValue: 0
+        m_CurrentValue: 40
+    - rid: 3949958629257905083
+      type: {class: PrimaryStat, ns: StatAndEffects.Stat, asm: StatAndEffects}
+      data:
+        m_DigitAccuracy: 2
+        m_MaxModCapacity: 16
+        m_StatDefinition: {fileID: 0}
+        m_BaseValue: 0
+        m_FinalValue: 0
+        m_ModifiedValue: 0
+        m_IsDirty: 0
+        _modifiersCollection:
+          rid: 3949958629257905090
+    - rid: 3949958629257905084
+      type: {class: PrimaryStat, ns: StatAndEffects.Stat, asm: StatAndEffects}
+      data:
+        m_DigitAccuracy: 2
+        m_MaxModCapacity: 2
+        m_StatDefinition: {fileID: 0}
+        m_BaseValue: 5
+        m_FinalValue: 0
+        m_ModifiedValue: 0
+        m_IsDirty: 0
+        _modifiersCollection:
+          rid: 3949958629257905091
+    - rid: 3949958629257905085
+      type: {class: PrimaryStat, ns: StatAndEffects.Stat, asm: StatAndEffects}
+      data:
+        m_DigitAccuracy: 1
+        m_MaxModCapacity: 2
+        m_StatDefinition: {fileID: 0}
+        m_BaseValue: 10
+        m_FinalValue: 0
+        m_ModifiedValue: 0
+        m_IsDirty: 0
+        _modifiersCollection:
+          rid: 3949958629257905092
+    - rid: 3949958629257905086
+      type: {class: LevelStat, ns: StatAndEffects.Stat, asm: StatAndEffects}
+      data:
+        m_DigitAccuracy: 2
+        m_MaxModCapacity: 16
+        m_StatDefinition: {fileID: 0}
+        m_BaseValue: 0
+        m_FinalValue: 0
+        m_ModifiedValue: 0
+        m_IsDirty: 0
+        _modifiersCollection:
+          rid: 3949958629257905093
+        m_Level: 1
+        m_MaxLevel: 1
+        m_CurrentXp: 0
+        m_BaseXp: 100
+        _growthFactor: 1.2
+    - rid: 3949958629257905087
+      type: {class: LevelStat, ns: StatAndEffects.Stat, asm: StatAndEffects}
+      data:
+        m_DigitAccuracy: 1
+        m_MaxModCapacity: 16
+        m_StatDefinition: {fileID: 0}
+        m_BaseValue: 120
+        m_FinalValue: 0
+        m_ModifiedValue: 0
+        m_IsDirty: 0
+        _modifiersCollection:
+          rid: 3949958629257905094
+        m_Level: 2
+        m_MaxLevel: 10
+        m_CurrentXp: 0
+        m_BaseXp: 100
+        _growthFactor: 1.2
+    - rid: 3949958629257905088
+      type: {class: LayeredModifierCollection, ns: StatAndEffects.Modifiers, asm: StatAndEffects}
+      data:
+        _layerCreationContext:
+          rid: 3949958629257905095
+        _serializedModifiers: []
+        _capacity: 0
+    - rid: 3949958629257905089
+      type: {class: LayeredModifierCollection, ns: StatAndEffects.Modifiers, asm: StatAndEffects}
+      data:
+        _layerCreationContext:
+          rid: 3949958629257905096
+        _serializedModifiers: []
+        _capacity: 0
+    - rid: 3949958629257905090
+      type: {class: LayeredModifierCollection, ns: StatAndEffects.Modifiers, asm: StatAndEffects}
+      data:
+        _layerCreationContext:
+          rid: -2
+        _serializedModifiers: []
+        _capacity: 16
+    - rid: 3949958629257905091
+      type: {class: LayeredModifierCollection, ns: StatAndEffects.Modifiers, asm: StatAndEffects}
+      data:
+        _layerCreationContext:
+          rid: 3949958629257905097
+        _serializedModifiers: []
+        _capacity: 0
+    - rid: 3949958629257905092
+      type: {class: LayeredModifierCollection, ns: StatAndEffects.Modifiers, asm: StatAndEffects}
+      data:
+        _layerCreationContext:
+          rid: 3949958629257905098
+        _serializedModifiers: []
+        _capacity: 0
+    - rid: 3949958629257905093
+      type: {class: LayeredModifierCollection, ns: StatAndEffects.Modifiers, asm: StatAndEffects}
+      data:
+        _layerCreationContext:
+          rid: -2
+        _serializedModifiers: []
+        _capacity: 16
+    - rid: 3949958629257905094
+      type: {class: LayeredModifierCollection, ns: StatAndEffects.Modifiers, asm: StatAndEffects}
+      data:
+        _layerCreationContext:
+          rid: 3949958629257905099
+        _serializedModifiers: []
+        _capacity: 0
+    - rid: 3949958629257905095
+      type: {class: LayerCreationContext, ns: StatAndEffects.Builder, asm: StatAndEffects}
+      data:
+        layers:
+          keys: 0000000001000000
+          values:
+          - operations:
+              keys: 
+              values: 
+          - operations:
+              keys: 
+              values: 
+        operationsData:
+          keys: 
+          values: 
+    - rid: 3949958629257905096
+      type: {class: LayerCreationContext, ns: StatAndEffects.Builder, asm: StatAndEffects}
+      data:
+        layers:
+          keys: 000000000100000002000000
+          values:
+          - operations:
+              keys: 
+              values: 
+          - operations:
+              keys: 
+              values: 
+          - operations:
+              keys: 
+              values: 
+        operationsData:
+          keys: 
+          values: 
+    - rid: 3949958629257905097
+      type: {class: LayerCreationContext, ns: StatAndEffects.Builder, asm: StatAndEffects}
+      data:
+        layers:
+          keys: 00000000
+          values:
+          - operations:
+              keys: 
+              values: 
+        operationsData:
+          keys: 
+          values: 
+    - rid: 3949958629257905098
+      type: {class: LayerCreationContext, ns: StatAndEffects.Builder, asm: StatAndEffects}
+      data:
+        layers:
+          keys: 000000000100000002000000
+          values:
+          - operations:
+              keys: 
+              values: 
+          - operations:
+              keys: 
+              values: 
+          - operations:
+              keys: 
+              values: 
+        operationsData:
+          keys: 
+          values: 
+    - rid: 3949958629257905099
+      type: {class: LayerCreationContext, ns: StatAndEffects.Builder, asm: StatAndEffects}
+      data:
+        layers:
+          keys: 000000000100000002000000
+          values:
+          - operations:
+              keys: 
+              values: 
+          - operations:
+              keys: 
+              values: 
+          - operations:
+              keys: 
+              values: 
+        operationsData:
+          keys: 
+          values: 
+--- !u!4 &1831711907
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1831711905}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -12.96857, y: 0, z: -384.07254}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -669,8 +734,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2015230722}
-  - component: {fileID: 2015230724}
   - component: {fileID: 2015230725}
+  - component: {fileID: 2015230726}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -693,19 +758,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2015230724
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2015230720}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c439ffd26b6a09441939c97bb0bd03a9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: StatAndEffects::NewMonoBehaviourScript
-  stats: {fileID: 2015230725}
 --- !u!114 &2015230725
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -719,119 +771,70 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: StatAndEffects::StatAndEffects.EntityStats
   Container:
-    rid: 4576332926529306819
+    rid: 3949958609660281277
   references:
     version: 2
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 4576332926529306819
+    - rid: 3949958609660281277
       type: {class: EntityStatsContainer, ns: StatAndEffects, asm: StatAndEffects}
       data:
+        effects: []
         StatsList:
-        - rid: 4576332942180614414
-        - rid: 4576332926529306820
-        - rid: 4576332926529306829
-        - rid: 4576332926529306831
-        - rid: 4576332942180614412
-        effects:
-        - rid: 4576332942180614757
-        - rid: 4576332942180614847
-        - rid: 4576332942180615022
-    - rid: 4576332926529306820
+        - rid: 8078216412576612591
+    - rid: 8078216412576612591
       type: {class: PrimaryStat, ns: StatAndEffects.Stat, asm: StatAndEffects}
       data:
         m_DigitAccuracy: 2
         m_MaxModCapacity: 16
+        m_StatDefinition: {fileID: 0}
+        m_BaseValue: 0
+        m_FinalValue: 2
+        m_ModifiedValue: 2
         m_IsDirty: 0
-        m_StatDefinition: {fileID: 11400000, guid: 7cdb7c5b3210d2341972b058c6201af5, type: 2}
-        m_Value: 2
-        m_BaseValue: 2
-        m_ModifiedValue: 0
-        m_EffectValue: 0
+        _modifiersCollection:
+          rid: 8078216412576612592
+    - rid: 8078216412576612592
+      type: {class: LayeredModifierCollection, ns: StatAndEffects.Modifiers, asm: StatAndEffects}
+      data:
         _layerCreationContext:
           rid: -2
-        serializedStatModifiers: []
-    - rid: 4576332926529306829
-      type: {class: PrimaryStat, ns: StatAndEffects.Stat, asm: StatAndEffects}
+        _serializedModifiers:
+        - rid: 8078216412576612593
+        - rid: 8078216412576612601
+        _capacity: 16
+    - rid: 8078216412576612593
+      type: {class: StatModifier, ns: StatAndEffects.Modifiers, asm: StatAndEffects}
       data:
-        m_DigitAccuracy: 2
-        m_MaxModCapacity: 16
-        m_IsDirty: 0
-        m_StatDefinition: {fileID: 11400000, guid: 5949ae514bb3d1b4b87e68e1aba7e0c9, type: 2}
-        m_Value: 109
-        m_BaseValue: 100
-        m_ModifiedValue: 9
-        m_EffectValue: 0
-        _layerCreationContext:
-          rid: -2
-        serializedStatModifiers: []
-    - rid: 4576332926529306831
-      type: {class: PrimaryStat, ns: StatAndEffects.Stat, asm: StatAndEffects}
+        type: 100
+        layer: 5
+        value: 1
+        guid: 014d781d-73c0-4c84-a0ed-e1bafc807b0f
+    - rid: 8078216412576612601
+      type: {class: StatModifier, ns: StatAndEffects.Modifiers, asm: StatAndEffects}
       data:
-        m_DigitAccuracy: 2
-        m_MaxModCapacity: 16
-        m_IsDirty: 0
-        m_StatDefinition: {fileID: 11400000, guid: 2de154f37205a0a4e8423cf9c33f4179, type: 2}
-        m_Value: 1.25
-        m_BaseValue: 1.25
-        m_ModifiedValue: 0
-        m_EffectValue: 0
-        _layerCreationContext:
-          rid: -2
-        serializedStatModifiers: []
-    - rid: 4576332942180614412
-      type: {class: PrimaryStat, ns: StatAndEffects.Stat, asm: StatAndEffects}
-      data:
-        m_DigitAccuracy: 2
-        m_MaxModCapacity: 16
-        m_IsDirty: 0
-        m_StatDefinition: {fileID: 11400000, guid: d4fd3527bace338469d70e025a0b2773, type: 2}
-        m_Value: 2
-        m_BaseValue: 2
-        m_ModifiedValue: 0
-        m_EffectValue: 0
-        _layerCreationContext:
-          rid: -2
-        serializedStatModifiers: []
-    - rid: 4576332942180614414
-      type: {class: VitalStat, ns: StatAndEffects.Stat, asm: StatAndEffects}
-      data:
-        m_DigitAccuracy: 2
-        m_MaxModCapacity: 16
-        m_IsDirty: 0
-        m_StatDefinition: {fileID: 11400000, guid: a5203ca9d27335e4b845d4d6e50ea803, type: 2}
-        m_Value: 107
-        m_BaseValue: 100
-        m_ModifiedValue: 7
-        m_EffectValue: 0
-        _layerCreationContext:
-          rid: -2
-        serializedStatModifiers: []
-        m_MinValue: 0
-        m_CurrentValue: 100
-    - rid: 4576332942180614757
-      type: {class: EffectOverTimePipeline, ns: StatAndEffects.Effects, asm: StatAndEffects}
-      data:
-        name: DamageOvertime
-        negate: 1
-        effectObject: {fileID: 11400000, guid: 84618a48d5c1d6b44b0404fea07115ab, type: 2}
-        tickInterval: 1
-        maxTicks: 5
-    - rid: 4576332942180614847
-      type: {class: InstantEffectPipeline, ns: StatAndEffects.Effects, asm: StatAndEffects}
-      data:
-        name: Damage
-        negate: 1
-        effectObject: {fileID: 11400000, guid: 84618a48d5c1d6b44b0404fea07115ab, type: 2}
-        result: 0
-    - rid: 4576332942180615022
-      type: {class: InstantEffectPipeline, ns: StatAndEffects.Effects, asm: StatAndEffects}
-      data:
-        name: CalculateDamage
-        negate: 0
-        effectObject: {fileID: 11400000, guid: 403ef849d090e7c4095bb4622a3c0dd0, type: 2}
-        result: 0
+        type: 100
+        layer: 5
+        value: 1
+        guid: ed021181-b501-4b2c-adee-ca6be96987ef
+--- !u!114 &2015230726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2015230720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddc855cbe87e4ef29c3d30167ac9b1cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: StatAndEffects::StatAndEffects.Attributes
+  entityStats: {fileID: 2015230725}
+  attributeStats: []
+  references:
+    version: 2
+    RefIds: []
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -841,4 +844,4 @@ SceneRoots:
   - {fileID: 2015230722}
   - {fileID: 171392274}
   - {fileID: 792517187}
-  - {fileID: 1346974656}
+  - {fileID: 1831711907}

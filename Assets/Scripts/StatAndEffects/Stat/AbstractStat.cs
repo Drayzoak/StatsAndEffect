@@ -1,224 +1,204 @@
 using System;
 using System.Collections.Generic;
-using Common.Extensions;
+using System.Runtime.CompilerServices;
 using StatAndEffects.Builder;
 using StatAndEffects.Modifiers;
 using UnityEngine;
 using Unity.Properties;
 using UnityEngine.Serialization;
+using UnityEngine.UIElements;
 
 namespace StatAndEffects.Stat
 {
-    
     [Serializable]
     public abstract partial class AbstractStat 
+        : IDataSourceViewHashProvider, INotifyBindablePropertyChanged
     {
-    #region Statcache
+    #region CONFIG
+        protected const int DEFAULT_LIST_CAPACITY = 16;
+        protected const int DEFAULT_DIGIT_ACCURACY = 2;
+        private const int MAXIMUM_ROUND_DIGITS = 6;
+    #endregion
         
-        [SerializeField]
-        private int m_DigitAccuracy;
+    #region Fields
+        [SerializeField] private int m_DigitAccuracy = DEFAULT_DIGIT_ACCURACY;
+        [SerializeField] private int m_MaxModCapacity = DEFAULT_LIST_CAPACITY;
+
+        [SerializeField] protected StatDefinition m_StatDefinition;
+
+        [SerializeField] protected float m_BaseValue;
+        [SerializeField] protected float m_FinalValue;
+        [SerializeField] protected float m_ModifiedValue;
+
+        [SerializeField] private bool m_IsDirty = true;
+
+        [SerializeReference] 
+        private LayeredModifierCollection _modifiersCollection;
+    #endregion
+    
+    #region Event
+        public event Action BaseValueChanged;
+        public event Action ModifiedValueChanged;
+    #endregion
+        
+    #region Properties
         [CreateProperty]
-        public int DigitAccuracy
-        {
-            get => m_DigitAccuracy;
-        }
-        
-        [SerializeField]
-        private int m_MaxModCapacity;
+        public int DigitAccuracy => m_DigitAccuracy;
+
         [CreateProperty]
-        public int MaxModCapacity
-        {
-            get => m_MaxModCapacity;
-        }
-        
-        [HideInInspector][SerializeField]
-        private bool m_IsDirty;
+        public int MaxModCapacity => m_MaxModCapacity;
+
         public bool IsDirty
         {
             get => m_IsDirty;
             set
             {
+                if (m_IsDirty == value) return;
+
                 m_IsDirty = value;
+
                 if (m_IsDirty)
                 {
-                    this.NotifyPropertyChanged();
-                    OnModifiersChanged();
+                    Calculate();
+                    NotifyPropertyChanged();
                 }
             }
         }
-
-        [SerializeReference]
-        private LayeredModifierCollection _modifiersCollection;
-        public LayeredModifierCollection ModifiersCollection  => _modifiersCollection;
-
-    #endregion 
-        
-    #region Events
-        public event Action ModifiedValueChanged;
-        protected virtual void OnModifiedValueChanged() => ModifiedValueChanged?.Invoke();
-        private void OnModifiersChanged() => ModifiedValueChanged?.Invoke();
-    #endregion
-        
-    #region StatData
-        [Header("StatValues")]
-        [SerializeField,DontCreateProperty]
-        protected StatDefinition m_StatDefinition;
-        
-        [SerializeField, DontCreateProperty]
-        protected float m_Value;
-        [SerializeField, DontCreateProperty]
-        protected float m_BaseValue;
-        [SerializeField, DontCreateProperty]
-        protected float m_ModifiedValue;
-        [SerializeField, DontCreateProperty]
-        protected float m_EffectValue;
+        public LayeredModifierCollection ModifiersCollection => _modifiersCollection;
 
         [CreateProperty]
         public StatDefinition StatDefinition
         {
-            get => this.m_StatDefinition; 
+            get => m_StatDefinition;
             set
             {
-                if (Equals(this.m_StatDefinition, value)) return;
-                this.m_StatDefinition = value;
-                this.NotifyPropertyChanged();
+                if (Equals(m_StatDefinition, value)) return;
+
+                m_StatDefinition = value;
+                MarkDirty();
+                NotifyPropertyChanged();
             }
         }
-        
-        [CreateProperty]
-        public float Value{
-            get
-            {
-                if (IsDirty) CalculateModifiedValue(m_DigitAccuracy);
-                
-                return m_Value;
-            }
-            private set
-            {
-                if (Mathf.Approximately(this.m_Value, value)) return;
-                m_Value = value;
-                this.NotifyPropertyChanged();
-            }
-        }
-        
+
         [CreateProperty]
         public float BaseValue
         {
             get => m_BaseValue;
             set
             {
-                if(Mathf.Approximately(m_BaseValue,value)) return ;
+                if (Mathf.Approximately(m_BaseValue, value)) return;
+
+                m_BaseValue = Round(value);
+                MarkDirty();
                 
-                m_BaseValue = (float)Math.Round(value,DigitAccuracy);
-                
-                this.NotifyPropertyChanged();
-                IsDirty = true;
+                NotifyPropertyChanged();
+                BaseValueChanged?.Invoke();
             }
         }
-        
-        
+
+        /// <summary>
+        /// Final evaluated value (Base + Modifiers)
+        /// </summary>
+        [CreateProperty]
+        public float Value
+        {
+            get
+            {
+                EnsureCalculated();
+                return m_FinalValue;
+            }
+        }
+
+        /// <summary>
+        /// Difference from base value
+        /// </summary>
         [CreateProperty]
         public float ModifiedValue
         {
             get
             {
-                if (IsDirty) CalculateModifiedValue(m_DigitAccuracy);
-                return m_ModifiedValue;
-            }
-            private set
-            {
-                if (Mathf.Approximately(m_ModifiedValue, value)) return;
-                
-                m_ModifiedValue = value;
-                this.NotifyPropertyChanged();
-                OnModifiedValueChanged();
+                EnsureCalculated();
+                return this.m_ModifiedValue;
             }
         }
-        
-        
-        
-    #endregion
 
-    #region Constant
-        protected const int DEFAULT_LIST_CAPACITY = 16;
-        protected const int DEFAULT_DIGIT_ACCURACY = 2;
-        private const int MAXIMUM_ROUND_DIGITS = 6;
     #endregion
-
-    #region operator
-        public static implicit operator float(AbstractStat stat)
-        {
-            return stat.Value;
-        }
-    #endregion
+        
         protected AbstractStat(
             float baseValue,
             string statDefinition = "NN",
             int digitAccuracy = DEFAULT_DIGIT_ACCURACY,
             int modsMaxCapacity = DEFAULT_LIST_CAPACITY,
-            LayerCreationContext layerCreationContext = null
-        )
+            LayerCreationContext layerCreationContext = null)
         {
             m_DigitAccuracy = digitAccuracy;
             m_MaxModCapacity = modsMaxCapacity;
 
             if (!string.IsNullOrEmpty(statDefinition))
-            {
                 m_StatDefinition = StatAbilitiesManager.TryToGetValue(statDefinition);
-            }
+
+            _modifiersCollection = layerCreationContext != null
+                ? new LayeredModifierCollection(layerCreationContext)
+                : new LayeredModifierCollection(modsMaxCapacity);
             
-            if (layerCreationContext != null)
-                _modifiersCollection = new LayeredModifierCollection(layerCreationContext);
-            else
-                _modifiersCollection = new LayeredModifierCollection(modsMaxCapacity);
+            
             BaseValue = baseValue;
-            
         }
 
         protected AbstractStat()
         {
-            m_DigitAccuracy = DEFAULT_DIGIT_ACCURACY;
-            m_MaxModCapacity = DEFAULT_LIST_CAPACITY;
-            
-            this._modifiersCollection  = new LayeredModifierCollection();
+            _modifiersCollection = new LayeredModifierCollection();
         }
-        
 
-        private float CalculateModifiedValue(int digitAccuracy)
+        // ================= CORE LOGIC =================
+
+        protected void EnsureCalculated()
         {
-            digitAccuracy = Mathf.Clamp(digitAccuracy, 0, MAXIMUM_ROUND_DIGITS);
-            
-            float finalValue =  this._modifiersCollection.Evaluate(BaseValue);
-            finalValue = (float)Math.Round(finalValue, digitAccuracy);
+            if (!m_IsDirty) return;
 
-            Value = finalValue;
-            ModifiedValue = finalValue - BaseValue ;
-
-            IsDirty = false;
-
-            return ModifiedValue;
+            Calculate();
         }
 
-        public bool ContainsModifier(StatModifier statModifier) =>
-            this._modifiersCollection.ContainsModifier(statModifier);
-        
-        public bool ContainsModifier(StatModifier statModifier , StatLayer statLayer) =>
-            this._modifiersCollection.ContainsModifier(statModifier, statLayer);
+        private void Calculate()
+        {
+            int accuracy = Mathf.Clamp(m_DigitAccuracy, 0, MAXIMUM_ROUND_DIGITS);
 
-        public List<StatModifier> GetModifiers() => 
-            this._modifiersCollection.GetAllModifiersCopy();
-        
-        public List<StatModifier> GetModifiersOf(StatModifierType statModifierType) => 
-            this._modifiersCollection.GetModifiersCopy(statModifierType);
+            float final = _modifiersCollection.Evaluate(m_BaseValue);
+            final = (float)Math.Round(final, accuracy);
 
-        public List<StatModifier> GetModifiersOf(StatLayer statLayer) => 
-            this._modifiersCollection.GetModifiersCopy(statLayer);
-        
-        public List<StatModifier> GetModifierOf(StatLayer statLayer,StatModifierType statModifierType) =>
-            this._modifiersCollection.GetModifiersCopy(statLayer, statModifierType);
-        
+            m_FinalValue = final;
+            this.m_ModifiedValue = final - m_BaseValue;
+
+            m_IsDirty = false;
+
+            NotifyPropertyChanged(nameof(Value));
+            NotifyPropertyChanged(nameof(ModifiedValue));
+            ModifiedValueChanged?.Invoke();
+        }
+
+        public void MarkDirty()
+        {
+            m_IsDirty = true;
+            this.EnsureCalculated();
+        }
+
+        private float Round(float value)
+        {
+            return (float)Math.Round(value, m_DigitAccuracy);
+        }
+
+        // ================= UTIL =================
+
+        public bool ContainsModifier(StatModifier mod) =>
+            _modifiersCollection.ContainsModifier(mod);
+
+        public List<StatModifier> GetModifiers() =>
+            _modifiersCollection.GetAllModifiersCopy();
+
         public string GetStatName() =>
-            this.StatDefinition ? this.StatDefinition : "Stat";
-        
+            m_StatDefinition ? m_StatDefinition : "Stat";
+
+        public static implicit operator float(AbstractStat stat) => stat.Value;
+
     }
 }

@@ -29,7 +29,8 @@ namespace StatAndEffects
         public void ClearStats() => this.Container.ClearStats();
         public IEnumerator<AbstractStat> GetEnumerator() => this.Container.GetEnumerator();
 
-        public void Start() => this.Container.Initialize();
+        public void Awake() => this.Container.Initialize();
+        
     }
 
 }

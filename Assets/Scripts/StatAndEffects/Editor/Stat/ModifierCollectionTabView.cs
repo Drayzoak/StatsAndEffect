@@ -17,9 +17,7 @@ namespace StatAndEffects.Editor.Stat
         private List<StatModifier> _currentModifiers;
         private Dictionary<StatModifierType, Tab> _tabs;
         private SerializedProperty _property;
-
-        public Action onEdit;
-
+        
         private void Reset()
         {
             _listView?.Unbind();
@@ -32,7 +30,9 @@ namespace StatAndEffects.Editor.Stat
             _tabs = null;
 
             _property = null;
+            
         }
+        
         public ModifierCollection Collection
         {
             get => this._collection;
@@ -43,6 +43,13 @@ namespace StatAndEffects.Editor.Stat
         {
             get => this._statLayer;
             set => this._statLayer = value;
+        }
+        
+        private LayeredModifierCollection _layeredModifierCollection;
+        public LayeredModifierCollection LayeredModifiers
+        {
+            get => this._layeredModifierCollection;
+            set => this._layeredModifierCollection = value;
         }
         public void Initialize(SerializedProperty property)
         {
@@ -187,13 +194,46 @@ namespace StatAndEffects.Editor.Stat
         
         private void Apply()
         {
-            var stat = this._property.managedReferenceValue as AbstractStat;
-            this.onEdit?.Invoke();
-            if (stat != null)
-                stat.IsDirty = true;
             _property.serializedObject.ApplyModifiedProperties();
             EditorUtility.SetDirty(_property.serializedObject.targetObject);
+            this._layeredModifierCollection?.MarkDirty();
+            var stat = this._property.managedReferenceValue as AbstractStat;
+            if (stat != null)
+                stat.MarkDirty();
+        }
+        
+        public void Refresh(bool rebuildList = false)
+        {
+            if (_collection == null || activeTab == null)
+                return;
+
+            // 🔹 rebuild current data
+            _currentModifiers = activeTab.label == "All"
+                ? _collection.GetModifiersCopy()
+                : _collection.GetModifiersCopy((StatModifierType)activeTab.dataSource);
+
+            // 🔹 update tab labels
+            foreach (var kvp in _tabs)
+            {
+                var op = _collection[kvp.Key];
+                kvp.Value.label = $"{kvp.Key} {op.Count}/{op.Capacity}";
+            }
+
+            // 🔹 refresh list
+            if (_listView == null)
+                return;
+
+            if (rebuildList)
+            {
+                _listView.itemsSource = _currentModifiers;
+                _listView.Rebuild();
+            }
+            else
+            {
+                _listView.itemsSource = _currentModifiers;
+                _listView.RefreshItems();
+            }
         }
     }
-
+    
 }

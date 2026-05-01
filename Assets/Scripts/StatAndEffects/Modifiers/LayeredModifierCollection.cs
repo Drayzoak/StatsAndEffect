@@ -6,13 +6,25 @@ using UnityEngine;
 using ZLinq;
 namespace StatAndEffects.Modifiers
 {
-    
+    [Serializable]
     public sealed partial class LayeredModifierCollection 
     {
         private Dictionary<StatLayer,ModifierCollection> _layers;
         private Dictionary<StatModifierType, List<ModifierOperationBase>> _operations;
         
-        private bool _isDirty = true;
+        private bool _IsDirty = true;
+        
+        public bool IsDirty
+        {
+            get
+            {
+                return this._IsDirty;
+            }
+            private set
+            {
+                this._IsDirty = value;
+            }
+        }
         private float _cachedValue;
         private float _lastBaseValue;
         private List<StatModifier> _tempCache;
@@ -110,12 +122,12 @@ namespace StatAndEffects.Modifiers
 
             _tempCache = new List<StatModifier>(32);
         }
-        public void MarkDirty() => this._isDirty = true;
+        public void MarkDirty() => this.IsDirty = true;
 
         public float Evaluate(float baseValue)
         {
             this.Initialize();
-            if (!this._isDirty && Mathf.Approximately(baseValue, this._lastBaseValue))
+            if (!this.IsDirty && Mathf.Approximately(baseValue, this._lastBaseValue))
                 return this._cachedValue;
 
             this._lastBaseValue = baseValue;
@@ -131,7 +143,7 @@ namespace StatAndEffects.Modifiers
             }
 
             this._cachedValue = value;
-            this._isDirty = false;
+            this.IsDirty = false;
 
             return value;
         }
@@ -141,7 +153,8 @@ namespace StatAndEffects.Modifiers
         {
             if (this._layers[modifier.Layer].TryAddModifier(modifier))
             {
-                this._isDirty = true;
+                this.MarkDirty();
+                modifier.ValueChanged += this.MarkDirty;
                 return true;
             }
 
@@ -152,7 +165,8 @@ namespace StatAndEffects.Modifiers
         {
             if (this._layers[modifier.Layer].TryRemoveModifier(modifier))
             {
-                this._isDirty = true;
+                this.MarkDirty();
+                modifier.ValueChanged -= this.MarkDirty;
                 return true;
             }
 
@@ -166,7 +180,7 @@ namespace StatAndEffects.Modifiers
                 modifierCollection.Clear();
             }
 
-            this._isDirty = true;
+            this.IsDirty = true;
         }
 
         public (bool allAdded, List<StatModifier> failedModifiers) TryAddModifiers(IEnumerable<StatModifier> modifiers)
@@ -178,8 +192,8 @@ namespace StatAndEffects.Modifiers
                 if (!this.TryAddModifier(m))
                     this._tempCache.Add(m);
             }
-
-            this._isDirty = true;
+            
+            this.MarkDirty();
             return (this._tempCache.Count == 0, this._tempCache);
         }
 
@@ -192,8 +206,7 @@ namespace StatAndEffects.Modifiers
                 if (!this.TryRemoveModifier(m))
                     this._tempCache.Add(m);
             }
-
-            this._isDirty = true;
+            this.MarkDirty();
             return (this._tempCache.Count == 0, this._tempCache);
         }
 

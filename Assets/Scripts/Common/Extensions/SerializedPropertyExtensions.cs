@@ -1,6 +1,7 @@
 #if UNITY_EDITOR
 
 using System;
+using System.Collections.Generic;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using UnityEditor;
@@ -12,7 +13,6 @@ namespace Common.Extensions
         {
             return property.propertyPath.Contains("Array.data[");
         }
-
         public static Type GetManagedReferenceFieldType(this SerializedProperty property)
         {
             var target = property.serializedObject.targetObject;
@@ -25,7 +25,18 @@ namespace Common.Extensions
                 System.Reflection.BindingFlags.Instance
             );
 
-            return field?.FieldType;
+            if (field == null)
+                return null;
+
+            var fieldType = field.FieldType;
+
+            // 🔥 If it's a List<T>, return T
+            if (fieldType.IsGenericType && fieldType.GetGenericTypeDefinition() == typeof(List<>))
+            {
+                return fieldType.GetGenericArguments()[0];
+            }
+
+            return fieldType;
         }
         
         public static Type GetFieldType(SerializedProperty property)

@@ -13,6 +13,10 @@ namespace StatAndEffects.Modifiers
         [SerializeField,DontCreateProperty] private StatModifierType type;
         [SerializeField,DontCreateProperty] private StatLayer layer;
         [SerializeField,DontCreateProperty] private float value;
+        [SerializeField,DontCreateProperty] string guid;
+        
+        public event Action ValueChanged;
+        private void OnValueChanged() => ValueChanged?.Invoke();
         
         [CreateProperty]
         public float Value
@@ -22,6 +26,7 @@ namespace StatAndEffects.Modifiers
             {
                 if (Mathf.Approximately(value , this.value)) return;
                 this.value = value;
+                this.OnValueChanged();
                 this.NotifyPropertyChanged();
             }
         }
@@ -49,6 +54,17 @@ namespace StatAndEffects.Modifiers
                 this.NotifyPropertyChanged();
             }
         }
+
+        [CreateProperty]
+        public string Guid
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(guid))
+                    guid = System.Guid.NewGuid().ToString();
+                return guid;
+            } 
+        } 
         
         public static implicit operator float(StatModifier modifier) => modifier.Value;
 
@@ -57,14 +73,9 @@ namespace StatAndEffects.Modifiers
             this.value = value;
             this.Type = type;
             this.layer = layer;
+            this.guid = System.Guid.NewGuid().ToString();
         }
         
-        public StatModifier()
-        {
-            this.value = 1;
-            this.Type = StatModifierType.Flat;
-            this.layer = StatLayer.Base;
-        }
         private long viewHash;
         
         public event EventHandler<BindablePropertyChangedEventArgs> propertyChanged;

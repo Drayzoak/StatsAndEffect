@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Common;
 using Common.Helper;
+using Common.MyUiToolkit;
 using StatAndEffects.Modifiers;
 using StatAndEffects.Stat;
 using Unity.Properties;
@@ -18,11 +19,11 @@ namespace StatAndEffects.Editor.Stat
         public Action<string> changeStatType;
 
         private DropdownField _statTypeDropdown;
-        private ObjectField _statObjectField;
+        protected ObjectField _statObjectField;
         private FloatField _baseValueField;
         private FloatField _modifiedValueField;
         private Label _valueField;
-        private Foldout _foldout;
+        protected IconFoldout _foldout;
 
         private readonly LayerCollectionTabView _layerCollectionTabView = new LayerCollectionTabView();
 
@@ -30,7 +31,7 @@ namespace StatAndEffects.Editor.Stat
         protected VisualElement _tabField;
         public string Name
         {
-            set => this._foldout.text = value;            
+            set => this._foldout.Text = value;            
         }
 
         public void Initialize()
@@ -83,7 +84,7 @@ namespace StatAndEffects.Editor.Stat
             this._valueField         = this.Q<Label>("Value");
             this ._tabField          = this.Q<VisualElement>("TabField");
 
-            this._foldout = this.Q<Foldout>("Foldout");
+            this._foldout = this.Q<IconFoldout>("Foldout");
 
             this._statTypeDropdown.RegisterValueChangedCallback(this.OnDropdownValueChanged);
             this._statObjectField.RegisterValueChangedCallback(this.OnStatObjectChange);
@@ -104,12 +105,8 @@ namespace StatAndEffects.Editor.Stat
             AbstractStat stat = (AbstractStat)dataSource;
             
             this._baseValueField.SetValueWithoutNotify(stat.BaseValue);
-            PropertySetterHelper.BindElement(
-                this._baseValueField,
-                () => stat.BaseValue,
-                v => stat.BaseValue = v,
-                this._property
-            );
+            DataBindingHelper.BindTwoWay(this._baseValueField, 
+                new PropertyPath(nameof(AbstractStat.BaseValue)));
 
             this._modifiedValueField.SetValueWithoutNotify(stat.ModifiedValue);
             DataBindingHelper.BindOneWay(this._modifiedValueField,
@@ -126,8 +123,17 @@ namespace StatAndEffects.Editor.Stat
                 this._property,
                 this.OnStatObjectChange
             );
-            
-            this._foldout.text = stat.StatDefinition ? stat.StatDefinition.DisplayName : "Stat";
+
+            this._foldout.Icon = new StyleBackground(stat.StatDefinition?.Icon);
+            this._foldout.ShowButton = true;
+            this._foldout.ButtonText = "Refresh";
+            this._foldout.OnButtonClicked = Refresh;
+            this._foldout.Text = stat.StatDefinition ? stat.StatDefinition.DisplayName : "Stat";
+        }
+        private void Refresh()
+        {
+            AbstractStat stat = dataSource as AbstractStat;
+            stat?.MarkDirty();
         }
 
         private void ResetElement()
@@ -144,9 +150,9 @@ namespace StatAndEffects.Editor.Stat
             this.changeStatType?.Invoke(evt.newValue);
         }
 
-        private void OnStatObjectChange(ChangeEvent<Object> evt)
+        protected void OnStatObjectChange(ChangeEvent<Object> evt)
         {
-            this._foldout.text = evt.newValue is StatDefinition def
+            this._foldout.Text = evt.newValue is StatDefinition def
                 ? def.DisplayName
                 : "None";
         }

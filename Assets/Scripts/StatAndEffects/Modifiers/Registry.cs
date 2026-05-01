@@ -11,6 +11,7 @@ namespace StatAndEffects.Modifiers
         public static Dictionary<StatModifierType, ModifierOperationBase> CreateDefaultOperations(int capacity)
         {
             Dictionary<StatModifierType,ModifierOperationBase> operations = new ();
+            
             operations.Add(StatModifierType.Flat, new FlatModifierOperation(capacity));
             operations.Add(StatModifierType.Multiplicative, new MultiplicativeModifierOperation(capacity));
             operations.Add(StatModifierType.Additive, new AdditiveModifierOperation(capacity));
@@ -21,6 +22,7 @@ namespace StatAndEffects.Modifiers
         public static Dictionary<StatLayer, ModifierCollection> CreateDefaultLayers(int capacity)
         {
             Dictionary<StatLayer, ModifierCollection> layers = new ();
+            layers.Add(StatLayer.Attribute, new ModifierCollection(capacity));
             layers.Add(StatLayer.Base, new ModifierCollection(capacity));
             layers.Add(StatLayer.Gear, new ModifierCollection(capacity));
             return layers;

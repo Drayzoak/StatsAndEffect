@@ -62,15 +62,6 @@ namespace StatAndEffects.Stat
         }
         #endregion
 
-        #region Overrides
-
-        protected override void OnModifiedValueChanged()
-        {
-            base.OnModifiedValueChanged();
-            this.ClampCurrent();
-        }
-
-        #endregion
 
         #region Helpers
 

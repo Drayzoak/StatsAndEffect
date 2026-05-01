@@ -10,7 +10,6 @@ namespace StatAndEffects
     {
         [SerializeReference]
         public List<AbstractStat> StatsList = new List<AbstractStat>();
-
         
         private Dictionary<int, AbstractStat> statById = new();
         private Dictionary<string, AbstractStat> statByName = new();
@@ -22,7 +21,7 @@ namespace StatAndEffects
 
         void EnsureStatLookup()
         {
-            if (this.lookupBuilt)
+            if (this.lookupBuilt && this.statById.Count == this.StatsList.Count) 
                 return;
 
             this.RebuildLookup();

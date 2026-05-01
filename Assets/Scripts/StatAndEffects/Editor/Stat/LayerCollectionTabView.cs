@@ -28,10 +28,10 @@ namespace StatAndEffects.Editor.Stat
 
         private void Cleanup()
         {
-            // Unsubscribe + clear existing views
+
             foreach (var view in _views.Values)
             {
-                view.onEdit -= OnEdit;
+                view?.Clear();
             }
 
             _views.Clear();
@@ -43,6 +43,9 @@ namespace StatAndEffects.Editor.Stat
 
         private void BuildTabs()
         {
+            this.Clear();
+            _views.Clear();
+
             foreach (var kvp in _layeredModifiers)
             {
                 CreateLayerTab(kvp.Key, kvp.Value);
@@ -59,10 +62,10 @@ namespace StatAndEffects.Editor.Stat
             var view = new ModifierCollectionTabView
             {
                 Collection = collection,
-                StatLayer = layer
+                StatLayer = layer,
+                LayeredModifiers = _layeredModifiers,
             };
 
-            view.onEdit += OnEdit;
             view.Initialize(_property);
 
             _views[layer] = view;
@@ -71,9 +74,28 @@ namespace StatAndEffects.Editor.Stat
             this.Add(tab);
         }
 
-        private void OnEdit()
+        // ================= 🔥 REFRESH =================
+
+        private void OnLayerDirty()
         {
-            _layeredModifiers?.MarkDirty();
+            RefreshAll();
+        }
+
+        public void RefreshAll()
+        {
+            if (_layeredModifiers == null)
+                return;
+
+            foreach (var kvp in _views)
+            {
+                kvp.Value?.Refresh(); // 🔥 call child refresh
+            }
+        }
+
+        // 🔥 Optional: full rebuild (if structure changed)
+        public void RebuildAll()
+        {
+            BuildTabs();
         }
     }
 }

@@ -28,32 +28,101 @@ namespace StatAndEffects
 
         void RebuildEffects()
         {
-            this.effectsLookup.Clear();
+            effectsLookup.Clear();
 
-            foreach (EffectPipeline pipeline in this.effects)
+            foreach (var pipeline in effects)
             {
+                if (pipeline == null || string.IsNullOrEmpty(pipeline.name))
+                    continue;
+
                 pipeline.Initialize(this);
-                this.effectsLookup.Add(pipeline.name, pipeline);
+
+                if (!effectsLookup.ContainsKey(pipeline.name))
+                    effectsLookup.Add(pipeline.name, pipeline);
             }
-            this.effectsBuilt = true;
+
+            effectsBuilt = true;
         }
 
         public float ExecuteEffect(string effectName, float value = 1)
         {
-            this.EnsureEffectLookup();
+            EnsureEffectLookup();
 
-            if (this.effectsLookup.TryGetValue(effectName, out EffectPipeline pipeline))
+            if (!effectsLookup.TryGetValue(effectName, out var pipeline))
+                return 0;
+
+            if (pipeline is InstantEffectPipeline instant)
             {
-                if (pipeline is InstantEffectPipeline instantEffect)
-                {
-                    instantEffect.ExecuteEffect(value);
-                    Debug.Log($"Effect {effectName}: {instantEffect.result}");
-                    return instantEffect.result;
-                }
-                pipeline.ExecuteEffect(value);
+                instant.ExecuteEffect(value);
+                return instant.result;
             }
+
+            pipeline.ExecuteEffect(value);
             return 0;
         }
+        
+        public bool AddEffect(EffectPipeline effect)
+        {
+            if (effect == null || string.IsNullOrEmpty(effect.name))
+                return false;
+
+            EnsureEffectLookup();
+
+            if (effectsLookup.ContainsKey(effect.name))
+                return false; // prevent duplicate
+
+            effects.Add(effect);
+
+            effect.Initialize(this);
+            effectsLookup.Add(effect.name, effect);
+
+            return true;
+        }
+        
+        public bool RemoveEffect(string effectName)
+        {
+            EnsureEffectLookup();
+
+            if (!effectsLookup.TryGetValue(effectName, out var effect))
+                return false;
+
+            effects.Remove(effect);
+            effectsLookup.Remove(effectName);
+
+            return true;
+        }
+        
+        public bool RemoveEffect(EffectPipeline effect)
+        {
+            if (effect == null)
+                return false;
+
+            if (!effects.Remove(effect))
+                return false;
+
+            effectsLookup.Remove(effect.name);
+            return true;
+        }
+        
+        public bool TryGetEffect<T>(string name, out T effect) where T : EffectPipeline
+        {
+            EnsureEffectLookup();
+
+            if (effectsLookup.TryGetValue(name, out var baseEffect) && baseEffect is T typedEffect)
+            {
+                effect = typedEffect;
+                return true;
+            }
+
+            effect = null;
+            return false;
+        }
+        
+        public void ClearEffects()
+        {
+            effects.Clear();
+            effectsLookup.Clear();
+            effectsBuilt = false;
+        }
     }
-    
 }

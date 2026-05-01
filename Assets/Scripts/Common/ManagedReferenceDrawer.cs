@@ -22,7 +22,7 @@ namespace Common
 
             if (fieldType.IsGenericType)
                 return fieldType.GetGenericArguments()[0];
-
+            
             return fieldType;
         }
 
