@@ -553,6 +553,15 @@ Max ticks
     }
 
 ```
+
+## Images
+![Image alt](/Image/Screenshot%202026-04-16%20231359.png)
+![Image alt](/Image/Screenshot%202026-04-24%20212812.png)
+![Image alt](/Image/Screenshot%202026-04-24%20212825.png)
+![Image alt](/Image/Screenshot%202026-04-24%20213220.png)
+![Image alt](/Image/Screenshot%202026-04-24%20213240.png)
+
+
 * IMPORTANT
 
 Use EntityStats For Effect Aa Effect is still in development need some improvement
